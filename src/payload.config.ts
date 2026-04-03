@@ -67,7 +67,6 @@ export default buildConfig({
     Meetings,
   ],
   plugins: [
-    /*
     // S3 Storage - enable only when S3 credentials are configured
     ...(process.env.S3_BUCKET
       ? [
@@ -95,7 +94,6 @@ export default buildConfig({
           }),
         ]
       : []),
-    */
   ],
   secret: process.env.PAYLOAD_SECRET || 'default-secret-change-in-production',
   sharp,
