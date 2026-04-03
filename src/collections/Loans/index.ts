@@ -48,6 +48,10 @@ function generateInstallmentSchedule(
 
 export const Loans: CollectionConfig = {
   slug: 'loans',
+  labels: {
+    singular: 'Pinjaman',
+    plural: 'Data Pinjaman',
+  },
   admin: {
     useAsTitle: 'loanId',
     group: 'Simpan Pinjam',

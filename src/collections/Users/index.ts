@@ -4,9 +4,13 @@ import { checkRole } from '../../access/checkRole'
 export const Users: CollectionConfig = {
   slug: 'users',
   auth: true,
+  labels: {
+    singular: 'Pengguna',
+    plural: 'Data Pengguna',
+  },
   admin: {
     useAsTitle: 'name',
-    group: 'Sistem',
+    group: 'Pengaturan Sistem',
     defaultColumns: ['name', 'email', 'roles'],
     description: 'Manajemen pengguna sistem Koperasi Merah Putih',
   },

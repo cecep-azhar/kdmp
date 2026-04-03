@@ -3,8 +3,12 @@ import { isLoggedIn, isStaffOrAbove } from '../../access'
 
 export const Media: CollectionConfig = {
   slug: 'media',
+  labels: {
+    singular: 'Media',
+    plural: 'Galeri Media',
+  },
   admin: {
-    group: 'Sistem',
+    group: 'Pengaturan Sistem',
     description: 'Upload dan manajemen file media',
   },
   access: {

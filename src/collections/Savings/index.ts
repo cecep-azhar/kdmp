@@ -3,6 +3,10 @@ import { isSelfOrAdmin, isStaffOrAbove, isAdminOrPengurus } from '../../access'
 
 export const Savings: CollectionConfig = {
   slug: 'savings',
+  labels: {
+    singular: 'Simpanan',
+    plural: 'Data Simpanan',
+  },
   admin: {
     useAsTitle: 'savingId',
     group: 'Simpan Pinjam',

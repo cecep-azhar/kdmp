@@ -3,6 +3,10 @@ import { isAdminOrPengurus, isStaffOrAbove } from '../../access'
 
 export const Logs: CollectionConfig = {
   slug: 'logs',
+  labels: {
+    singular: 'Kejadian',
+    plural: 'Buku Kejadian Penting',
+  },
   admin: {
     useAsTitle: 'title',
     group: '9 Buku Koperasi',

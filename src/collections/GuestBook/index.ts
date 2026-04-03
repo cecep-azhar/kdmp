@@ -3,6 +3,10 @@ import { isAdminOrPengurus, isStaffOrAbove } from '../../access'
 
 export const GuestBook: CollectionConfig = {
   slug: 'guest-book',
+  labels: {
+    singular: 'Buku Tamu',
+    plural: 'Daftar Buku Tamu',
+  },
   admin: {
     useAsTitle: 'guestName',
     group: '9 Buku Koperasi',

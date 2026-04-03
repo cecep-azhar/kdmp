@@ -3,6 +3,10 @@ import { isAdminOrPengurus, isStaffOrAbove } from '../../access'
 
 export const Ledger: CollectionConfig = {
   slug: 'ledger',
+  labels: {
+    singular: 'Buku Besar',
+    plural: 'Jurnal Umum',
+  },
   admin: {
     useAsTitle: 'description',
     group: 'Keuangan',

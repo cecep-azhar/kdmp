@@ -20,6 +20,19 @@ import { Assets } from './collections/Assets'
 import { Logs } from './collections/Logs'
 import { GuestBook } from './collections/GuestBook'
 import { Meetings } from './collections/Meetings'
+import { BoardMembers } from './collections/BoardMembers'
+import { Supervisors } from './collections/Supervisors'
+import { Employees } from './collections/Employees'
+import { MemberRegistry } from './collections/MemberRegistry'
+import { Suggestions } from './collections/Suggestions'
+import { MailLog } from './collections/MailLog'
+
+// Globals
+import { Settings } from './globals/Settings'
+
+// Translations
+import { id } from '@payloadcms/translations/languages/id'
+import { en } from '@payloadcms/translations/languages/en'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -28,8 +41,8 @@ export default buildConfig({
   admin: {
     user: Users.slug,
     meta: {
-      titleSuffix: ' | Koperasi Merah Putih',
-      description: 'Sistem Informasi Koperasi Merah Putih',
+      titleSuffix: ' | KDMP',
+      description: 'Sistem Informasi Koperasi',
     },
     components: {
       graphics: {
@@ -46,6 +59,10 @@ export default buildConfig({
     dateFormat: 'dd MMMM yyyy',
   },
   editor: lexicalEditor(),
+  i18n: {
+    supportedLanguages: { id, en },
+    fallbackLanguage: 'id',
+  },
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URL || '',
@@ -53,7 +70,6 @@ export default buildConfig({
   }),
   collections: [
     Users,
-    Media,
     Members,
     Savings,
     Loans,
@@ -62,9 +78,19 @@ export default buildConfig({
     Products,
     Transactions,
     Assets,
-    Logs,
+    MemberRegistry,
+    BoardMembers,
+    Supervisors,
+    Employees,
     GuestBook,
+    Suggestions,
+    MailLog,
+    Logs,
     Meetings,
+    Media,
+  ],
+  globals: [
+    Settings,
   ],
   plugins: [
     // S3 Storage - enable only when S3 credentials are configured
@@ -100,4 +126,6 @@ export default buildConfig({
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
+  cors: ['http://localhost:3000', 'http://localhost:3001'],
+  csrf: ['http://localhost:3000', 'http://localhost:3001'],
 })

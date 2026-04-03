@@ -3,6 +3,10 @@ import { isAdminOrPengurus, isStaffOrAbove } from '../../access'
 
 export const Meetings: CollectionConfig = {
   slug: 'meetings',
+  labels: {
+    singular: 'Rapat',
+    plural: 'Buku Notulen Rapat',
+  },
   admin: {
     useAsTitle: 'title',
     group: '9 Buku Koperasi',

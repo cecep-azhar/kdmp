@@ -3,6 +3,10 @@ import { isAdminOrPengurus, isSuperAdmin } from '../../access'
 
 export const Accounts: CollectionConfig = {
   slug: 'accounts',
+  labels: {
+    singular: 'Akun Keuangan',
+    plural: 'Bagan Akun',
+  },
   admin: {
     useAsTitle: 'name',
     group: 'Keuangan',

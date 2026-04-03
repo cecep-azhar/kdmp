@@ -4,6 +4,10 @@ import { isStaffOrAbove, isAdminOrPengurus } from '../../access'
 
 export const Members: CollectionConfig = {
   slug: 'members',
+  labels: {
+    singular: 'Anggota',
+    plural: 'Data Anggota',
+  },
   admin: {
     useAsTitle: 'fullName',
     group: 'Simpan Pinjam',

@@ -3,6 +3,10 @@ import { isStaffOrAbove, isAdminOrPengurus } from '../../access'
 
 export const Assets: CollectionConfig = {
   slug: 'assets',
+  labels: {
+    singular: 'Aset',
+    plural: 'Daftar Inventaris',
+  },
   admin: {
     useAsTitle: 'name',
     group: 'Inventaris',

@@ -3,6 +3,10 @@ import { isKasirOrAbove, isAdminOrPengurus } from '../../access'
 
 export const Transactions: CollectionConfig = {
   slug: 'transactions',
+  labels: {
+    singular: 'Transaksi',
+    plural: 'Histori Transaksi',
+  },
   admin: {
     useAsTitle: 'transactionId',
     group: 'POS',

@@ -245,32 +245,42 @@ const Dashboard = () => {
     todayRevenue: 0,
   })
   const [activities, setActivities] = useState<ActivityItem[]>([])
+  const [settings, setSettings] = useState<any>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const fetchStats = async () => {
+    const fetchData = async () => {
       try {
-        const res = await fetch('/api/stats')
-        const data = await res.json()
-
-        if (data.stats) {
-          setStats({
-            ...data.stats,
-            totalSavings: data.stats.totalSavingsCount, // Map totalSavingsCount to totalSavings for display
-          })
+        const [statsRes, settingsRes] = await Promise.all([
+          fetch('/api/stats'),
+          fetch('/api/globals/settings')
+        ])
+        
+        if (statsRes.ok) {
+          const data = await statsRes.json()
+          if (data.stats) {
+            setStats({
+              ...data.stats,
+              totalSavings: data.stats.totalSavingsCount,
+            })
+          }
+          if (data.activities) {
+            setActivities(data.activities)
+          }
         }
         
-        if (data.activities) {
-          setActivities(data.activities)
+        if (settingsRes.ok) {
+          const settingsData = await settingsRes.json()
+          setSettings(settingsData)
         }
       } catch (error) {
-        console.error('Failed to fetch dashboard stats:', error)
+        console.error('Failed to fetch dashboard data:', error)
       } finally {
         setLoading(false)
       }
     }
 
-    fetchStats()
+    fetchData()
   }, [])
 
   const formatCurrency = (num: number) => {
@@ -284,6 +294,9 @@ const Dashboard = () => {
   const recentActivities = activities.length > 0 ? activities : [
     { text: 'Sistem siap dioperasikan', time: 'Baru saja', type: 'system' },
   ]
+  
+  const appName = settings?.appName || 'Koperasi Desa Merah Putih'
+  const primaryColor = settings?.primaryColor || '#DC2626'
 
   return (
     <div style={{
@@ -307,7 +320,7 @@ const Dashboard = () => {
             width: '56px',
             height: '56px',
             borderRadius: '16px',
-            background: 'linear-gradient(135deg, #DC2626, #EF4444)',
+            background: `linear-gradient(135deg, ${primaryColor}, #EF4444)`,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -325,7 +338,7 @@ const Dashboard = () => {
               margin: 0,
               lineHeight: '1.2',
             }}>
-              Dashboard Koperasi Merah Putih
+              Dashboard {appName}
             </h1>
             <p style={{
               fontSize: '14px',
@@ -485,9 +498,9 @@ const Dashboard = () => {
                   fontSize: '12px',
                 }}>
                   {[
-                    { label: '1. Buku Anggota', href: '/admin/collections/members' },
-                    { label: '2. Buku Pengurus', href: '/admin/collections/users' },
-                    { label: '3. Buku Pengawas', href: '/admin/collections/users' },
+                    { label: '1. Buku Anggota', href: '/admin/collections/member-registry' },
+                    { label: '2. Buku Pengurus', href: '/admin/collections/board-members' },
+                    { label: '3. Buku Pengawas', href: '/admin/collections/supervisors' },
                     { label: '4. Buku Simpanan', href: '/admin/collections/savings' },
                     { label: '5. Buku Pinjaman', href: '/admin/collections/loans' },
                     { label: '6. Buku Inventaris', href: '/admin/collections/assets' },
@@ -524,6 +537,33 @@ const Dashboard = () => {
           </div>
         </>
       )}
+
+      {/* Global Footer */}
+      <div style={{
+        marginTop: '60px',
+        borderTop: '1px solid var(--theme-elevation-150)',
+        paddingTop: '24px',
+        textAlign: 'right',
+        color: 'var(--theme-elevation-500)',
+        fontSize: '13px',
+      }}>
+        <div>Dibuat dengan ❤️ di Bandung, Indonesia — <strong style={{ color: 'var(--theme-elevation-800)' }}>Cecep Azhar</strong> &copy; 2026</div>
+        <div style={{ marginTop: '8px' }}>
+          <a
+            href="https://cecepazhar.com/support"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              color: 'var(--theme-primary, #3B82F6)',
+              textDecoration: 'underline',
+              fontWeight: '500',
+            }}
+          >
+            Traktir kopi ☕
+          </a>
+        </div>
+      </div>
+
     </div>
   )
 }
