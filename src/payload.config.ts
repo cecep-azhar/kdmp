@@ -33,15 +33,15 @@ export default buildConfig({
     },
     components: {
       graphics: {
-        Logo: '/src/components/admin/Logo',
-        Icon: '/src/components/admin/Icon',
+        Logo: '@/components/admin/Logo',
+        Icon: '@/components/admin/Icon',
       },
       views: {
         dashboard: {
-          Component: '/src/components/admin/Dashboard',
+          Component: '@/components/admin/Dashboard',
         },
       },
-      afterNavLinks: ['/src/components/admin/NavFooter'],
+      afterNavLinks: ['@/components/admin/NavFooter'],
     },
     dateFormat: 'dd MMMM yyyy',
   },
@@ -67,6 +67,7 @@ export default buildConfig({
     Meetings,
   ],
   plugins: [
+    /*
     // S3 Storage - enable only when S3 credentials are configured
     ...(process.env.S3_BUCKET
       ? [
@@ -94,6 +95,7 @@ export default buildConfig({
           }),
         ]
       : []),
+    */
   ],
   secret: process.env.PAYLOAD_SECRET || 'default-secret-change-in-production',
   sharp,

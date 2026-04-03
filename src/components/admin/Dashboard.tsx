@@ -15,6 +15,12 @@ interface DashboardStats {
   todayRevenue: number
 }
 
+interface ActivityItem {
+  text: string
+  time: string
+  type: string
+}
+
 const StatCard = ({
   title,
   value,
@@ -238,37 +244,25 @@ const Dashboard = () => {
     todayTransactions: 0,
     todayRevenue: 0,
   })
+  const [activities, setActivities] = useState<ActivityItem[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const [membersRes, savingsRes, loansRes, productsRes, transactionsRes] = await Promise.all([
-          fetch('/api/members?limit=0'),
-          fetch('/api/savings?limit=0'),
-          fetch('/api/loans?limit=0'),
-          fetch('/api/products?limit=0'),
-          fetch('/api/transactions?limit=0'),
-        ])
+        const res = await fetch('/api/stats')
+        const data = await res.json()
 
-        const members = await membersRes.json()
-        const savings = await savingsRes.json()
-        const loans = await loansRes.json()
-        const products = await productsRes.json()
-        const transactions = await transactionsRes.json()
-
-        setStats({
-          totalMembers: members.totalDocs || 0,
-          activeMembers: members.totalDocs || 0,
-          totalSavings: savings.totalDocs || 0,
-          totalLoans: loans.totalDocs || 0,
-          pendingLoans: 0,
-          activeLoans: 0,
-          totalProducts: products.totalDocs || 0,
-          lowStockProducts: 0,
-          todayTransactions: transactions.totalDocs || 0,
-          todayRevenue: 0,
-        })
+        if (data.stats) {
+          setStats({
+            ...data.stats,
+            totalSavings: data.stats.totalSavingsCount, // Map totalSavingsCount to totalSavings for display
+          })
+        }
+        
+        if (data.activities) {
+          setActivities(data.activities)
+        }
       } catch (error) {
         console.error('Failed to fetch dashboard stats:', error)
       } finally {
@@ -287,8 +281,7 @@ const Dashboard = () => {
     }).format(num)
   }
 
-  const recentActivities = [
-    { text: 'Dashboard sistem berhasil dimuat', time: 'Baru saja', type: 'system' },
+  const recentActivities = activities.length > 0 ? activities : [
     { text: 'Sistem siap dioperasikan', time: 'Baru saja', type: 'system' },
   ]
 

@@ -19,6 +19,7 @@ function generateInstallmentSchedule(
     interest: number
     total: number
     status: string
+    paidDate?: string
   }> = []
 
   let remainingPrincipal = principal
@@ -86,6 +87,19 @@ export const Loans: CollectionConfig = {
           )
         }
 
+        // Recalculate totals if installment schedule exists
+        if (data?.installmentSchedule && Array.isArray(data.installmentSchedule)) {
+          const paidInstallments = data.installmentSchedule.filter((i: any) => i.status === 'paid')
+          const totalPaid = paidInstallments.reduce((sum: number, i: any) => sum + (i.total || 0), 0)
+          data.totalPaid = totalPaid
+          data.remainingBalance = (data.amount || 0) * (1 + (data.interestRate || 0) / 100) - totalPaid
+          
+          // If balance is 0 or less, mark as completed
+          if (data.remainingBalance <= 0 && data.status === 'active') {
+            data.status = 'completed'
+          }
+        }
+
         return data
       },
     ],
@@ -116,7 +130,49 @@ export const Loans: CollectionConfig = {
               },
             })
           } catch (error) {
-            console.error('Failed to create ledger entry for loan:', error)
+            console.error('Failed to create ledger entry for loan disbursement:', error)
+          }
+        }
+
+        // Create ledger entry when an installment is marked as paid
+        if (doc.installmentSchedule && previousDoc?.installmentSchedule) {
+          const newlyPaid = (doc.installmentSchedule as any[]).filter((curr: any, idx: number) => {
+            const prev = (previousDoc.installmentSchedule as any[])[idx]
+            return curr.status === 'paid' && prev?.status !== 'paid'
+          })
+
+          for (const inst of newlyPaid) {
+            try {
+              await req.payload.create({
+                collection: 'ledger',
+                data: {
+                  date: inst.paidDate || new Date().toISOString(),
+                  description: `Angsuran #${inst.installmentNo} - ${doc.loanId} (${doc.member.fullName || 'Anggota'})`,
+                  entries: [
+                    {
+                      account: '1-1001', // Kas
+                      debit: inst.total,
+                      credit: 0,
+                    },
+                    {
+                      account: '1-1003', // Piutang Pinjaman Anggota
+                      debit: 0,
+                      credit: inst.principal,
+                    },
+                    {
+                      account: '4-1003', // Pendapatan Bunga Pinjaman
+                      debit: 0,
+                      credit: inst.interest,
+                    }
+                  ],
+                  reference: `loans/${doc.id}`,
+                  journalType: 'cash-in',
+                  createdByUser: req.user?.id,
+                },
+              })
+            } catch (error) {
+              console.error('Failed to create ledger entry for installment payment:', error)
+            }
           }
         }
       },
