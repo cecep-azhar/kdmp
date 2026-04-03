@@ -1,10 +1,11 @@
 import { buildConfig } from 'payload'
 import { postgresAdapter } from '@payloadcms/db-postgres'
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { lexicalEditor, FixedToolbarFeature, HeadingFeature } from '@payloadcms/richtext-lexical'
 import { s3Storage } from '@payloadcms/storage-s3'
 import sharp from 'sharp'
 import path from 'path'
 import { fileURLToPath } from 'url'
+
 
 // Collections
 import { Users } from './collections/Users'
@@ -23,9 +24,10 @@ import { Meetings } from './collections/Meetings'
 import { BoardMembers } from './collections/BoardMembers'
 import { Supervisors } from './collections/Supervisors'
 import { Employees } from './collections/Employees'
-import { MemberRegistry } from './collections/MemberRegistry'
 import { Suggestions } from './collections/Suggestions'
 import { MailLog } from './collections/MailLog'
+import { News } from './collections/News'
+import { SixteenBooksNav } from './components/admin/SixteenBooksNav'
 
 // Globals
 import { Settings } from './globals/Settings'
@@ -53,12 +55,23 @@ export default buildConfig({
         dashboard: {
           Component: '@/components/admin/Dashboard',
         },
+        reports: {
+          Component: '@/components/admin/Reports',
+          path: '/reports',
+        },
       },
-      afterNavLinks: ['@/components/admin/NavFooter'],
+      // afterNavLinks: ['@/components/admin/NavFooter'],
+      beforeNavLinks: [SixteenBooksNav],
     },
     dateFormat: 'dd MMMM yyyy',
   },
-  editor: lexicalEditor(),
+  editor: lexicalEditor({
+    features: ({ defaultFeatures }) => [
+      ...defaultFeatures,
+      HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
+      FixedToolbarFeature(),
+    ],
+  }),
   i18n: {
     supportedLanguages: { id, en },
     fallbackLanguage: 'id',
@@ -69,16 +82,6 @@ export default buildConfig({
     },
   }),
   collections: [
-    Users,
-    Members,
-    Savings,
-    Loans,
-    Accounts,
-    Ledger,
-    Products,
-    Transactions,
-    Assets,
-    MemberRegistry,
     BoardMembers,
     Supervisors,
     Employees,
@@ -87,14 +90,28 @@ export default buildConfig({
     MailLog,
     Logs,
     Meetings,
+    Assets,
+    Members,
+    Savings,
+    Loans,
+    Accounts,
+    Ledger,
+    Products,
+    Transactions,
+    News,
+    
+
+    Users,
     Media,
   ],
   globals: [
     Settings,
   ],
   plugins: [
-    // S3 Storage - enable only when S3 credentials are configured
-    ...(process.env.S3_BUCKET
+    // S3 Storage - enable only when S3 credentials are configured and NOT placeholders
+    ...(process.env.S3_BUCKET && 
+        process.env.S3_ACCESS_KEY_ID && 
+        !process.env.S3_ACCESS_KEY_ID.startsWith('your-')
       ? [
           s3Storage({
             collections: {

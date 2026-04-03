@@ -9,8 +9,8 @@ export const Suggestions: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'subject',
-    group: '9 Buku Koperasi',
-    defaultColumns: ['date', 'subject', 'submittedBy', 'status'],
+    hidden: true,
+    defaultColumns: ['date', 'category', 'subject', 'submittedBy', 'status'],
     description: 'Buku Anjuran Khusus / Saran Anggota & Pejabat',
   },
   access: {
@@ -28,10 +28,27 @@ export const Suggestions: CollectionConfig = {
       defaultValue: () => new Date().toISOString(),
     },
     {
-      name: 'subject',
-      type: 'text',
-      required: true,
-      label: 'Perihal / Judul Saran',
+      type: 'row',
+      fields: [
+        {
+          name: 'category',
+          type: 'select',
+          required: true,
+          label: 'Kategori Saran/Anjuran',
+          defaultValue: 'member',
+          options: [
+            { label: 'Saran Anggota', value: 'member' },
+            { label: 'Anjuran Pejabat', value: 'officer' },
+            { label: 'Anjuran Instansi Lain', value: 'external_officer' },
+          ],
+        },
+        {
+          name: 'subject',
+          type: 'text',
+          required: true,
+          label: 'Perihal / Judul Saran',
+        },
+      ],
     },
     {
       name: 'submittedBy',

@@ -9,7 +9,7 @@ export const Assets: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'name',
-    group: 'Inventaris',
+    hidden: true,
     defaultColumns: ['assetCode', 'name', 'acquisitionDate', 'condition', 'currentValue'],
     description: 'Buku Inventaris - Pencatatan aset koperasi',
   },

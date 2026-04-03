@@ -1,18 +1,30 @@
-import React from 'react'
-import configPromise from '@payload-config'
-import { getPayload } from 'payload'
+'use client'
 
-const Logo = async () => {
-  const payload = await getPayload({ config: configPromise })
-  const settings = await payload.findGlobal({ slug: 'settings' })
-  const appName = settings?.appName || 'Koperasi Desa Merah Putih'
+import React, { useEffect, useState } from 'react'
+
+const Logo = () => {
+  const [appName, setAppName] = useState('SIKDMP')
+  const [primaryColor, setPrimaryColor] = useState('#DC2626')
+
+  useEffect(() => {
+    const fetchSettings = async () => {
+      try {
+        const res = await fetch('/api/globals/settings')
+        if (res.ok) {
+          const data = await res.json()
+          if (data.appName) setAppName(data.appName)
+          if (data.primaryColor) setPrimaryColor(data.primaryColor)
+        }
+      } catch (err) {
+        console.error('Failed to load logo settings', err)
+      }
+    }
+    fetchSettings()
+  }, [])
+
   const nameParts = appName.split(' ')
-  const mainPart = nameParts[0] || 'Koperasi'
-  const subPart = nameParts.slice(1).join(' ') || 'Desa Merah Putih'
-  const primaryColor = settings?.primaryColor || '#DC2626'
-
-  // If Logo exists, you could potentially fetch its URL. For simplicity in default UI, we use text.
-  // Assuming no appLogo logic here yet, but we will adapt colors and text.
+  const mainPart = nameParts[0] || 'SIKDMP'
+  const subPart = nameParts.slice(1).join(' ') || 'Koperasi Desa Merah Putih'
 
   return (
     <div style={{

@@ -8,9 +8,9 @@ export const Employees: CollectionConfig = {
     plural: 'Daftar Karyawan',
   },
   admin: {
-    useAsTitle: 'name',
-    group: '9 Buku Koperasi',
-    defaultColumns: ['name', 'position', 'hireDate', 'status'],
+    useAsTitle: 'member',
+    hidden: true,
+    defaultColumns: ['member', 'position', 'hireDate', 'status'],
     description: 'Buku Daftar Karyawan / Pegawai',
   },
   access: {
@@ -21,10 +21,11 @@ export const Employees: CollectionConfig = {
   },
   fields: [
     {
-      name: 'name',
-      type: 'text',
+      name: 'member',
+      type: 'relationship',
+      relationTo: 'members',
       required: true,
-      label: 'Nama Lengkap',
+      label: 'Nama Anggota (Karyawan)',
     },
     {
       type: 'row',

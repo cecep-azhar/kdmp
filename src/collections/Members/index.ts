@@ -5,14 +5,14 @@ import { isStaffOrAbove, isAdminOrPengurus } from '../../access'
 export const Members: CollectionConfig = {
   slug: 'members',
   labels: {
-    singular: 'Anggota',
-    plural: 'Data Anggota',
+    singular: 'Buku Induk Anggota',
+    plural: 'Buku Induk Anggota',
   },
   admin: {
     useAsTitle: 'fullName',
-    group: 'Simpan Pinjam',
+    hidden: true,
     defaultColumns: ['memberId', 'fullName', 'membershipStatus', 'joinDate'],
-    description: 'Data anggota koperasi',
+    description: 'Buku Induk / Data Pokok Anggota Koperasi',
   },
   access: {
     read: ({ req: { user } }) => {

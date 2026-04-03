@@ -9,7 +9,7 @@ export const Ledger: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'description',
-    group: 'Keuangan',
+    hidden: true,
     defaultColumns: ['date', 'description', 'reference', 'createdAt'],
     description: 'Jurnal Umum - Pencatatan setiap mutasi keuangan',
   },

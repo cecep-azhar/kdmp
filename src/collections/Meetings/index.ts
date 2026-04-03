@@ -9,7 +9,7 @@ export const Meetings: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'title',
-    group: '9 Buku Koperasi',
+    hidden: true,
     defaultColumns: ['date', 'title', 'meetingType', 'status'],
     description: 'Buku Rapat (RAT) - Arsip notulensi rapat koperasi',
   },
@@ -35,12 +35,9 @@ export const Meetings: CollectionConfig = {
           required: true,
           label: 'Jenis Rapat',
           options: [
-            { label: 'RAT (Rapat Anggota Tahunan)', value: 'rat' },
-            { label: 'Rapat Anggota Luar Biasa', value: 'ralb' },
-            { label: 'Rapat Pengurus', value: 'pengurus' },
-            { label: 'Rapat Pengawas', value: 'pengawas' },
-            { label: 'Rapat Koordinasi', value: 'coordination' },
-            { label: 'Lainnya', value: 'other' },
+            { label: 'Rapat Anggota / RAT', value: 'member' },
+            { label: 'Rapat Pengurus', value: 'board' },
+            { label: 'Rapat Pengawas', value: 'supervisor' },
           ],
         },
         {

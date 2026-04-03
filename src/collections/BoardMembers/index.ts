@@ -8,9 +8,9 @@ export const BoardMembers: CollectionConfig = {
     plural: 'Daftar Pengurus',
   },
   admin: {
-    useAsTitle: 'name',
-    group: '9 Buku Koperasi',
-    defaultColumns: ['name', 'position', 'periodStart', 'periodEnd', 'status'],
+    useAsTitle: 'member',
+    hidden: true,
+    defaultColumns: ['member', 'position', 'periodStart', 'periodEnd', 'status'],
     description: 'Buku Daftar Pengurus',
   },
   access: {
@@ -21,10 +21,11 @@ export const BoardMembers: CollectionConfig = {
   },
   fields: [
     {
-      name: 'name',
-      type: 'text',
+      name: 'member',
+      type: 'relationship',
+      relationTo: 'members',
       required: true,
-      label: 'Nama Lengkap',
+      label: 'Nama Anggota',
     },
     {
       type: 'row',

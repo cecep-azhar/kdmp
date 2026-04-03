@@ -9,7 +9,7 @@ export const GuestBook: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'guestName',
-    group: '9 Buku Koperasi',
+    hidden: true,
     defaultColumns: ['date', 'guestName', 'organization', 'purpose'],
     description: 'Buku Anjuran Pejabat / Buku Tamu',
   },

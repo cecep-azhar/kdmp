@@ -2,32 +2,29 @@ import { getPayload } from 'payload'
 import config from '../../../../payload.config'
 import { NextResponse } from 'next/server'
 
-export const GET = async () => {
+export const GET = async (req: Request) => {
   const payload = await getPayload({ config })
+  const { searchParams } = new URL(req.url)
+  const isReports = searchParams.get('reports') === 'true'
 
   try {
-    const [members, savings, loans, products, transactions] = await Promise.all([
+    const [members, savings, loans, products, transactions, ledger] = await Promise.all([
       payload.find({ collection: 'members', limit: 0 }),
       payload.find({ collection: 'savings', limit: 0 }),
       payload.find({ collection: 'loans', limit: 0 }),
       payload.find({ collection: 'products', limit: 0 }),
       payload.find({ collection: 'transactions', limit: 0 }),
+      payload.find({ collection: 'ledger', limit: 0 }),
     ])
 
-    // Hitung Ringkasan Statistik
+    // Hitung Ringkasan Statistik Utama
     const stats = {
       totalMembers: members.totalDocs,
       activeMembers: members.docs.filter((m: any) => m.membershipStatus === 'active').length,
-      
-      // Total Simpanan (Total dari semua transaksi simpanan)
       totalSavingsCount: savings.totalDocs,
-      
-      // Pinjaman
       totalLoans: loans.totalDocs,
       pendingLoans: loans.docs.filter((l: any) => l.status === 'pending').length,
       activeLoans: loans.docs.filter((l: any) => l.status === 'active').length,
-      
-      // POS
       totalProducts: products.totalDocs,
       lowStockProducts: products.docs.filter((p: any) => (p.stock || 0) <= (p.minStock || 0)).length,
       todayTransactions: transactions.docs.filter((t: any) => {
@@ -41,6 +38,26 @@ export const GET = async () => {
         return today === transDate ? acc + (t.totalAmount || 0) : acc
       }, 0),
     }
+
+    // Perhitungan Laporan Detail & SHU
+    const reports = {
+      totalInterest: loans.docs.reduce((acc: number, l: any) => {
+        // Dari jadwal angsuran yang sudah dibayar
+        const paidI = l.installmentSchedule?.filter((i: any) => i.status === 'paid') || []
+        return acc + paidI.reduce((sum: number, i: any) => sum + (i.interest || 0), 0)
+      }, 0),
+      totalSales: transactions.docs.reduce((acc: number, t: any) => acc + (t.totalAmount || 0), 0),
+      // Dummy expenses calculation for now (15% of revenue)
+      totalExpenses: Math.round((stats.todayRevenue || 0) * 0.15) + 500000, 
+      memberCount: stats.totalMembers,
+      loanCount: stats.activeLoans,
+      transactionCount: transactions.totalDocs,
+    }
+
+    // @ts-ignore
+    reports.totalRevenue = (reports.totalInterest || 0) + (reports.totalSales || 0)
+    // @ts-ignore
+    reports.shu = reports.totalRevenue - reports.totalExpenses
 
     // Ambil Aktivitas Terbaru
     const recentMembers = members.docs.slice(0, 3).map((m: any) => ({
@@ -57,6 +74,7 @@ export const GET = async () => {
 
     return NextResponse.json({
       stats,
+      reports: isReports ? reports : undefined,
       activities: [...recentMembers, ...recentTransactions].slice(0, 5)
     })
   } catch (error) {

@@ -32,7 +32,7 @@ export default function HomePage() {
 
       {/* Title */}
       <h1 style={{
-        fontSize: '48px',
+        fontSize: '40px',
         fontWeight: '800',
         margin: '0 0 8px',
         background: 'linear-gradient(135deg, #FFFFFF, #94A3B8)',
@@ -40,7 +40,7 @@ export default function HomePage() {
         WebkitTextFillColor: 'transparent',
         textAlign: 'center',
       }}>
-        Koperasi Merah Putih
+        SIKDMP<br/>Koperasi Desa Merah Putih
       </h1>
 
       <p style={{
@@ -112,8 +112,24 @@ export default function HomePage() {
         marginTop: '64px',
         fontSize: '13px',
         color: '#475569',
+        textAlign: 'center',
+        lineHeight: '1.8'
       }}>
-        © {new Date().getFullYear()} Koperasi Merah Putih. Powered by PayloadCMS & Next.js
+        <div>Dibuat dengan ❤️ di Bandung, Indonesia — <strong style={{ color: '#94A3B8' }}>Cecep Azhar</strong> &copy; {new Date().getFullYear()}</div>
+        <div style={{ marginTop: '4px' }}>
+          <a
+            href="https://cecepazhar.com/support"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              color: '#3B82F6',
+              textDecoration: 'underline',
+              fontWeight: '500',
+            }}
+          >
+            Traktir kopi ☕
+          </a>
+        </div>
       </div>
     </div>
   )

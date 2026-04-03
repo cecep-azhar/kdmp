@@ -8,9 +8,9 @@ export const Supervisors: CollectionConfig = {
     plural: 'Daftar Pengawas',
   },
   admin: {
-    useAsTitle: 'name',
-    group: '9 Buku Koperasi',
-    defaultColumns: ['name', 'position', 'periodStart', 'status'],
+    useAsTitle: 'member',
+    hidden: true,
+    defaultColumns: ['member', 'position', 'periodStart', 'status'],
     description: 'Buku Daftar Pengawas',
   },
   access: {
@@ -21,10 +21,11 @@ export const Supervisors: CollectionConfig = {
   },
   fields: [
     {
-      name: 'name',
-      type: 'text',
+      name: 'member',
+      type: 'relationship',
+      relationTo: 'members',
       required: true,
-      label: 'Nama Lengkap',
+      label: 'Nama Anggota',
     },
     {
       type: 'row',
