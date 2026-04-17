@@ -140,6 +140,7 @@ export const Members: CollectionConfig = {
                   required: true,
                   defaultValue: 'active',
                   label: 'Status Keanggotaan',
+                  index: true,
                   options: [
                     { label: 'Aktif', value: 'active' },
                     { label: 'Tidak Aktif', value: 'inactive' },

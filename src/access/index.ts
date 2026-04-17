@@ -38,13 +38,15 @@ export const isLoggedIn: Access = ({ req: { user } }) => {
 
 /**
  * Anggota hanya bisa melihat data miliknya sendiri
+ * Uses dot notation to query through relationship: member.user = current user
  */
 export const isSelfOrAdmin: Access = ({ req: { user } }) => {
   if (!user) return false
   if (checkRole(['super-admin', 'pengurus', 'staff'], user)) return true
 
+  // Query through relationship: member.user = current user's id
   return {
-    member: {
+    'member.user': {
       equals: user.id,
     },
   }

@@ -6,6 +6,7 @@ interface DashboardStats {
   totalMembers: number
   activeMembers: number
   totalSavings: number
+  totalSavingsTransactions: number
   totalLoans: number
   pendingLoans: number
   activeLoans: number
@@ -242,6 +243,7 @@ const Dashboard = () => {
     totalMembers: 0,
     activeMembers: 0,
     totalSavings: 0,
+    totalSavingsTransactions: 0,
     totalLoans: 0,
     pendingLoans: 0,
     activeLoans: 0,
@@ -267,7 +269,8 @@ const Dashboard = () => {
           if (data.stats) {
             setStats({
               ...data.stats,
-              totalSavings: data.stats.totalSavingsCount,
+              totalSavings: data.stats.totalSavingsAmount || 0,
+              totalSavingsTransactions: data.stats.totalSavingsTransactions || 0,
             })
           }
           if (data.activities) {
@@ -391,8 +394,8 @@ const Dashboard = () => {
             />
             <StatCard
               title="Total Simpanan"
-              value={stats.totalSavings}
-              subtitle="transaksi tercatat"
+              value={formatCurrency(stats.totalSavings)}
+              subtitle={`${stats.totalSavingsTransactions.toLocaleString()} transaksi`}
               icon="💰"
               color="#3B82F6"
               gradient="linear-gradient(135deg, #3B82F6, #60A5FA)"

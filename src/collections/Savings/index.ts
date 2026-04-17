@@ -36,30 +36,34 @@ export const Savings: CollectionConfig = {
     ],
     afterChange: [
       async ({ doc, operation, req }) => {
-        // Setelah simpanan dibuat, catat ke Ledger
+        // Setelah simpanan dibuat/status berubah, catat ke Ledger
         if (operation === 'create' && doc.status === 'completed') {
           try {
-            // Debit: Kas bertambah, Kredit: Simpanan anggota bertambah
             const accountCode = getSavingsAccountCode(doc.type)
+
+            // Determine entries based on transaction type
+            // Deposit: Kas debit, Simpanan kredit (aset & kewajiban bertambah)
+            // Withdrawal: Kas kredit, Simpanan debit (aset & kewajiban berkurang)
+            const entries = doc.transactionType === 'deposit'
+              ? [
+                  { account: COA.KAS, debit: doc.amount, credit: 0 },
+                  { account: accountCode, debit: 0, credit: doc.amount },
+                ]
+              : [
+                  { account: COA.KAS, debit: 0, credit: doc.amount },
+                  { account: accountCode, debit: doc.amount, credit: 0 },
+                ]
+
+            const transactionLabel = doc.transactionType === 'deposit' ? 'Setoran' : 'Penarikan'
 
             await req.payload.create({
               collection: 'ledger',
               data: {
                 date: new Date().toISOString(),
-                description: `Simpanan ${doc.type} - ${doc.savingId}`,
-                entries: [
-                  {
-                    account: COA.KAS, // Kas
-                    debit: doc.amount,
-                    credit: 0,
-                  },
-                  {
-                    account: accountCode,
-                    debit: 0,
-                    credit: doc.amount,
-                  },
-                ],
+                description: `${transactionLabel} Simpanan ${doc.type} - ${doc.savingId}`,
+                entries,
                 reference: `savings/${doc.id}`,
+                journalType: doc.transactionType === 'deposit' ? 'cash-in' : 'cash-out',
                 createdByUser: req.user?.id,
               },
             })
@@ -143,6 +147,7 @@ export const Savings: CollectionConfig = {
       required: true,
       defaultValue: 'completed',
       label: 'Status',
+      index: true,
       options: [
         { label: 'Selesai', value: 'completed' },
         { label: 'Pending', value: 'pending' },

@@ -41,26 +41,37 @@ interface ReportData {
   shu: number
 }
 
+interface SavingsDoc {
+  amount?: number
+  status?: string
+  createdAt: string
+}
+
 export const GET = async (req: Request) => {
   const payload = await getPayload({ config })
   const { searchParams } = new URL(req.url)
   const isReports = searchParams.get('reports') === 'true'
 
   try {
-    const [members, savings, loans, products, transactions, ledger] = await Promise.all([
+    const [members, savings, loans, products, transactions] = await Promise.all([
       payload.find({ collection: 'members', limit: 0 }) as Promise<{ docs: MemberDoc[]; totalDocs: number }>,
-      payload.find({ collection: 'savings', limit: 0 }),
+      payload.find({ collection: 'savings', limit: 0 }) as Promise<{ docs: SavingsDoc[]; totalDocs: number }>,
       payload.find({ collection: 'loans', limit: 0 }) as Promise<{ docs: LoanDoc[]; totalDocs: number }>,
       payload.find({ collection: 'products', limit: 0 }) as Promise<{ docs: ProductDoc[]; totalDocs: number }>,
       payload.find({ collection: 'transactions', limit: 0 }) as Promise<{ docs: TransactionDoc[]; totalDocs: number }>,
-      payload.find({ collection: 'ledger', limit: 0 }),
     ])
+
+    // Calculate total savings amount from completed savings transactions
+    const totalSavingsAmount = savings.docs
+      .filter((s: SavingsDoc) => s.status === 'completed')
+      .reduce((acc: number, s: SavingsDoc) => acc + (s.amount || 0), 0)
 
     // Hitung Ringkasan Statistik Utama
     const stats = {
       totalMembers: members.totalDocs,
       activeMembers: members.docs.filter((m: MemberDoc) => m.membershipStatus === 'active').length,
-      totalSavingsCount: savings.totalDocs,
+      totalSavingsAmount, // Sum of all savings amounts
+      totalSavingsTransactions: savings.totalDocs, // Count of transactions
       totalLoans: loans.totalDocs,
       pendingLoans: loans.docs.filter((l: LoanDoc) => l.status === 'pending').length,
       activeLoans: loans.docs.filter((l: LoanDoc) => l.status === 'active').length,

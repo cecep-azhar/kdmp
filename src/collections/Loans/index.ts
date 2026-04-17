@@ -3,6 +3,41 @@ import { isSelfOrAdmin, isStaffOrAbove, isAdminOrPengurus } from '../../access'
 import { COA } from '../../constants/chart-of-accounts'
 
 /**
+ * Interface for installment schedule entries
+ */
+interface Installment {
+  installmentNo: number
+  dueDate: string
+  principal: number
+  interest: number
+  total: number
+  status: 'unpaid' | 'paid' | 'overdue'
+  paidDate?: string
+}
+
+/**
+ * Interface for loan data used in hooks
+ */
+interface LoanHookData {
+  amount?: number
+  interestRate?: number
+  tenor?: number
+  status?: string
+  disbursementDate?: string
+  installmentSchedule?: Installment[]
+  totalPaid?: number
+  remainingBalance?: number
+}
+
+/**
+ * Interface for loan document in hooks
+ */
+interface LoanHookDoc extends LoanHookData {
+  id: string | number
+  loanId?: string
+}
+
+/**
  * Menghitung jadwal angsuran pinjaman
  */
 function generateInstallmentSchedule(
@@ -10,18 +45,10 @@ function generateInstallmentSchedule(
   interestRate: number,
   tenorMonths: number,
   startDate: string,
-) {
+): Installment[] {
   const monthlyInterest = interestRate / 100 / 12
   const monthlyPrincipal = Math.round(principal / tenorMonths)
-  const schedule: Array<{
-    installmentNo: number
-    dueDate: string
-    principal: number
-    interest: number
-    total: number
-    status: string
-    paidDate?: string
-  }> = []
+  const schedule: Installment[] = []
 
   let remainingPrincipal = principal
   const start = new Date(startDate)
@@ -94,11 +121,11 @@ export const Loans: CollectionConfig = {
 
         // Recalculate totals if installment schedule exists
         if (data?.installmentSchedule && Array.isArray(data.installmentSchedule)) {
-          const paidInstallments = data.installmentSchedule.filter((i: any) => i.status === 'paid')
-          const totalPaid = paidInstallments.reduce((sum: number, i: any) => sum + (i.total || 0), 0)
+          const paidInstallments = data.installmentSchedule.filter((i: Installment) => i.status === 'paid')
+          const totalPaid = paidInstallments.reduce((sum: number, i: Installment) => sum + (i.total || 0), 0)
           data.totalPaid = totalPaid
           data.remainingBalance = (data.amount || 0) * (1 + (data.interestRate || 0) / 100) - totalPaid
-          
+
           // If balance is 0 or less, mark as completed
           if (data.remainingBalance <= 0 && data.status === 'active') {
             data.status = 'completed'
@@ -141,8 +168,10 @@ export const Loans: CollectionConfig = {
 
         // Create ledger entry when an installment is marked as paid
         if (doc.installmentSchedule && previousDoc?.installmentSchedule) {
-          const newlyPaid = (doc.installmentSchedule as any[]).filter((curr: any, idx: number) => {
-            const prev = (previousDoc.installmentSchedule as any[])[idx]
+          const currentSchedule = doc.installmentSchedule as Installment[]
+          const previousSchedule = previousDoc.installmentSchedule as Installment[]
+          const newlyPaid = currentSchedule.filter((curr: Installment, idx: number) => {
+            const prev = previousSchedule[idx]
             return curr.status === 'paid' && prev?.status !== 'paid'
           })
 
@@ -160,7 +189,7 @@ export const Loans: CollectionConfig = {
                       credit: 0,
                     },
                     {
-                      account: COA.PIUTANG_ANGGOTA, // Piutang Pinjaman Anggota
+                      account: COA.PIUTANG_PINJAMAN, // Piutang Pinjaman Anggota
                       debit: 0,
                       credit: inst.principal,
                     },
@@ -269,6 +298,7 @@ export const Loans: CollectionConfig = {
               required: true,
               defaultValue: 'pending',
               label: 'Status',
+              index: true,
               options: [
                 { label: 'Menunggu Persetujuan', value: 'pending' },
                 { label: 'Disetujui', value: 'approved' },
