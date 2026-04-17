@@ -27,7 +27,7 @@ import { Employees } from './collections/Employees'
 import { Suggestions } from './collections/Suggestions'
 import { MailLog } from './collections/MailLog'
 import { News } from './collections/News'
-import { SixteenBooksNav } from './components/admin/SixteenBooksNav'
+// SixteenBooksNav is registered via string path in beforeNavLinks (required by Payload v3 importMap)
 
 // Globals
 import { Settings } from './globals/Settings'
@@ -61,7 +61,7 @@ export default buildConfig({
         },
       },
       // afterNavLinks: ['@/components/admin/NavFooter'],
-      beforeNavLinks: [SixteenBooksNav],
+      beforeNavLinks: ['@/components/admin/SixteenBooksNav#SixteenBooksNav'],
     },
     dateFormat: 'dd MMMM yyyy',
   },
@@ -138,11 +138,11 @@ export default buildConfig({
         ]
       : []),
   ],
-  secret: process.env.PAYLOAD_SECRET || 'default-secret-change-in-production',
+  secret: process.env.PAYLOAD_SECRET || '',
   sharp,
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
-  cors: ['http://localhost:3000', 'http://localhost:3001'],
-  csrf: ['http://localhost:3000', 'http://localhost:3001'],
+  cors: process.env.CORS_ORIGINS?.split(',') || ['http://localhost:3000', 'http://localhost:3001'],
+  csrf: process.env.CSRF_ORIGINS?.split(',') || ['http://localhost:3000', 'http://localhost:3001'],
 })

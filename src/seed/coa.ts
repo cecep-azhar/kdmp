@@ -92,7 +92,7 @@ export async function seedCOA() {
       data: createData,
     })
 
-    codeToId[account.code] = created.id as string
+    codeToId[account.code] = String(created.id)
     console.log(`  ✅ ${account.code} - ${account.name}`)
   }
 

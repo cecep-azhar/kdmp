@@ -20,6 +20,9 @@ importers:
       '@payloadcms/storage-s3':
         specifier: ^3.81.0
         version: 3.81.0(@types/react@19.2.14)(monaco-editor@0.55.1)(next@15.5.14(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(sass@1.77.4))(payload@3.81.0(graphql@16.13.2)(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3)
+      '@payloadcms/translations':
+        specifier: ^3.83.0
+        version: 3.83.0
       '@payloadcms/ui':
         specifier: ^3.81.0
         version: 3.81.0(@types/react@19.2.14)(monaco-editor@0.55.1)(next@15.5.14(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(sass@1.77.4))(payload@3.81.0(graphql@16.13.2)(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3)
@@ -1424,6 +1427,9 @@ packages:
 
   '@payloadcms/translations@3.81.0':
     resolution: {integrity: sha512-ruFKoYrTErl3Va5rOAyKn7Txh7wr6ZRw/KUZdj7YPOjI4LQpbtWYl3IQtcnS36x674GjeJOeWuEZJ50Xs3ofrQ==}
+
+  '@payloadcms/translations@3.83.0':
+    resolution: {integrity: sha512-Ie7Ty9Myb75wQ/gEedal+1PInrOtCeJJxjQAfG8C6hg9tBKYtwnW1IoRp4HrN7vHyYVyG15LKhXC40TevQU9Zw==}
 
   '@payloadcms/ui@3.81.0':
     resolution: {integrity: sha512-RRvwFOO6rOCSiRCdazNEvzCwqAVdNK+qyy5+N2l08JeYOQ8bkFiSIYElR/r/He8u6XvnG5YboPCkgUxDaTKoVg==}
@@ -5723,6 +5729,10 @@ snapshots:
       - typescript
 
   '@payloadcms/translations@3.81.0':
+    dependencies:
+      date-fns: 4.1.0
+
+  '@payloadcms/translations@3.83.0':
     dependencies:
       date-fns: 4.1.0
 

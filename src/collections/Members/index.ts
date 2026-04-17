@@ -44,7 +44,6 @@ export const Members: CollectionConfig = {
     {
       name: 'memberId',
       type: 'text',
-      required: true,
       unique: true,
       label: 'No. Anggota',
       admin: {

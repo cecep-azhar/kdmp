@@ -6,14 +6,11 @@ export const metadata = {
   description: 'Sistem Informasi Digital Koperasi Merah Putih',
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function AppGroupLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="id">
       <body>{children}</body>
     </html>
   )
 }
+

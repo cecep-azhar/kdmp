@@ -64,9 +64,9 @@ export const Settings: GlobalConfig = {
                   type: 'text',
                   label: 'Warna Utama (Primary/Hex)',
                   required: true,
-                  defaultValue: '#4f46e5', // Indigo 600 as default
+                  defaultValue: '#DC2626', // Merah (Red 600) - Warna Koperasi Merah Putih
                   admin: {
-                    description: 'Contoh: #4f46e5',
+                    description: 'Contoh: #DC2626',
                   },
                 },
                 {
@@ -74,9 +74,9 @@ export const Settings: GlobalConfig = {
                   type: 'text',
                   label: 'Warna Aksen (Accent/Hex)',
                   required: true,
-                  defaultValue: '#10b981', // Emerald 500 as default
+                  defaultValue: '#FFFFFF', // Putih - Warna Koperasi Merah Putih
                   admin: {
-                    description: 'Contoh: #10b981',
+                    description: 'Contoh: #FFFFFF atau #F59E0B untuk gold',
                   },
                 },
               ],
@@ -89,9 +89,9 @@ export const Settings: GlobalConfig = {
                   type: 'text',
                   label: 'Warna Utama (Mode Gelap/Hex)',
                   required: true,
-                  defaultValue: '#6366f1', // Indigo 500 as default
+                  defaultValue: '#EF4444', // Merah (Red 500) untuk dark mode
                   admin: {
-                    description: 'Contoh: #6366f1',
+                    description: 'Contoh: #EF4444',
                   },
                 },
               ]

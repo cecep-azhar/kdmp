@@ -21,6 +21,12 @@ interface ActivityItem {
   type: string
 }
 
+interface SettingsData {
+  appName?: string
+  primaryColor?: string
+  accentColor?: string
+}
+
 const StatCard = ({
   title,
   value,
@@ -245,7 +251,7 @@ const Dashboard = () => {
     todayRevenue: 0,
   })
   const [activities, setActivities] = useState<ActivityItem[]>([])
-  const [settings, setSettings] = useState<any>(null)
+  const [settings, setSettings] = useState<SettingsData | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

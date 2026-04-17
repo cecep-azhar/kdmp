@@ -1,5 +1,6 @@
 import type { CollectionConfig } from 'payload'
 import { isSelfOrAdmin, isStaffOrAbove, isAdminOrPengurus } from '../../access'
+import { COA, getSavingsAccountCode } from '../../constants/chart-of-accounts'
 
 export const Savings: CollectionConfig = {
   slug: 'savings',
@@ -38,10 +39,8 @@ export const Savings: CollectionConfig = {
         // Setelah simpanan dibuat, catat ke Ledger
         if (operation === 'create' && doc.status === 'completed') {
           try {
-            // Debit: Kas (1-1001) bertambah
-            // Kredit: Simpanan anggota bertambah
-            const accountCode = doc.type === 'pokok' ? '2-1001' :
-                                doc.type === 'wajib' ? '2-1002' : '2-1003'
+            // Debit: Kas bertambah, Kredit: Simpanan anggota bertambah
+            const accountCode = getSavingsAccountCode(doc.type)
 
             await req.payload.create({
               collection: 'ledger',
@@ -50,7 +49,7 @@ export const Savings: CollectionConfig = {
                 description: `Simpanan ${doc.type} - ${doc.savingId}`,
                 entries: [
                   {
-                    account: '1-1001', // Kas
+                    account: COA.KAS, // Kas
                     debit: doc.amount,
                     credit: 0,
                   },

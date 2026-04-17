@@ -3,6 +3,14 @@ import config from '../../../../payload.config'
 import { NextResponse } from 'next/server'
 
 export const GET = async () => {
+  // Security: Only allow in development or with proper secret
+  if (process.env.NODE_ENV === 'production' && process.env.ALLOW_INIT_ADMIN !== 'true') {
+    return NextResponse.json(
+      { error: 'Init admin endpoint is disabled in production' },
+      { status: 403 }
+    )
+  }
+
   const payload = await getPayload({ config })
   const email = 'admin@kdmp.com'
   const password = 'admin123'

@@ -1,5 +1,6 @@
 import type { CollectionConfig } from 'payload'
 import { isSelfOrAdmin, isStaffOrAbove, isAdminOrPengurus } from '../../access'
+import { COA } from '../../constants/chart-of-accounts'
 
 /**
  * Menghitung jadwal angsuran pinjaman
@@ -119,12 +120,12 @@ export const Loans: CollectionConfig = {
                 description: `Pencairan Pinjaman - ${doc.loanId}`,
                 entries: [
                   {
-                    account: '1-1002', // Piutang Pinjaman
+                    account: COA.PIUTANG_PINJAMAN, // Piutang Pinjaman
                     debit: doc.amount,
                     credit: 0,
                   },
                   {
-                    account: '1-1001', // Kas
+                    account: COA.KAS, // Kas
                     debit: 0,
                     credit: doc.amount,
                   },
@@ -154,17 +155,17 @@ export const Loans: CollectionConfig = {
                   description: `Angsuran #${inst.installmentNo} - ${doc.loanId} (${doc.member.fullName || 'Anggota'})`,
                   entries: [
                     {
-                      account: '1-1001', // Kas
+                      account: COA.KAS, // Kas
                       debit: inst.total,
                       credit: 0,
                     },
                     {
-                      account: '1-1003', // Piutang Pinjaman Anggota
+                      account: COA.PIUTANG_ANGGOTA, // Piutang Pinjaman Anggota
                       debit: 0,
                       credit: inst.principal,
                     },
                     {
-                      account: '4-1003', // Pendapatan Bunga Pinjaman
+                      account: COA.PENDAPATAN_BUNGA_PINJAMAN, // Pendapatan Bunga Pinjaman
                       debit: 0,
                       credit: inst.interest,
                     }

@@ -37,3 +37,4 @@ export const generateMetadata = async (): Promise<Metadata> => {
     description: 'Panel Admin Koperasi Merah Putih',
   }
 }
+
