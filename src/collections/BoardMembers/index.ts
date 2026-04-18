@@ -9,7 +9,7 @@ export const BoardMembers: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'member',
-    hidden: true,
+    group: 'Keanggotaan & SDM',
     defaultColumns: ['member', 'position', 'periodStart', 'periodEnd', 'status'],
     description: 'Buku Daftar Pengurus',
   },

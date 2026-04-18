@@ -10,7 +10,7 @@ export const Members: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'fullName',
-    hidden: true,
+    group: 'Keanggotaan & SDM',
     defaultColumns: ['memberId', 'fullName', 'membershipStatus', 'joinDate'],
     description: 'Buku Induk / Data Pokok Anggota Koperasi',
   },

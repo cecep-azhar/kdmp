@@ -9,7 +9,7 @@ export const Logs: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'title',
-    hidden: true,
+    group: 'Sekretariat',
     defaultColumns: ['date', 'title', 'category', 'importance'],
     description: 'Buku Kejadian Penting - Pencatatan peristiwa penting koperasi',
   },

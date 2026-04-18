@@ -9,7 +9,7 @@ export const Supervisors: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'member',
-    hidden: true,
+    group: 'Keanggotaan & SDM',
     defaultColumns: ['member', 'position', 'periodStart', 'status'],
     description: 'Buku Daftar Pengawas',
   },

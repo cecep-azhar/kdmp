@@ -9,7 +9,7 @@ export const Meetings: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'title',
-    hidden: true,
+    group: 'Sekretariat',
     defaultColumns: ['date', 'title', 'meetingType', 'status'],
     description: 'Buku Rapat (RAT) - Arsip notulensi rapat koperasi',
   },

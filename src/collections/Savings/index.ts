@@ -10,7 +10,7 @@ export const Savings: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'savingId',
-    hidden: true,
+    group: 'Simpan Pinjam',
     defaultColumns: ['savingId', 'member', 'type', 'amount', 'createdAt'],
     description: 'Pencatatan simpanan anggota',
   },

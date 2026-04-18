@@ -61,7 +61,7 @@ export default buildConfig({
         },
       },
       // afterNavLinks: ['@/components/admin/NavFooter'],
-      beforeNavLinks: ['@/components/admin/SixteenBooksNav#SixteenBooksNav'],
+      // beforeNavLinks: ['@/components/admin/SixteenBooksNav#SixteenBooksNav'],
     },
     dateFormat: 'dd MMMM yyyy',
   },

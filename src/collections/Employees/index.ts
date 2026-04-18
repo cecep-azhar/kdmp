@@ -9,7 +9,7 @@ export const Employees: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'member',
-    hidden: true,
+    group: 'Keanggotaan & SDM',
     defaultColumns: ['member', 'position', 'hireDate', 'status'],
     description: 'Buku Daftar Karyawan / Pegawai',
   },

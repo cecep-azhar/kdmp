@@ -9,7 +9,7 @@ export const Suggestions: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'subject',
-    hidden: true,
+    group: 'Sekretariat',
     defaultColumns: ['date', 'category', 'subject', 'submittedBy', 'status'],
     description: 'Buku Anjuran Khusus / Saran Anggota & Pejabat',
   },

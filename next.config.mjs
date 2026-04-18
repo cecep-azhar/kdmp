@@ -8,3 +8,5 @@ const nextConfig = {
 }
 
 export default withPayload(nextConfig)
+
+// Trigger Next.js Dev Server Restart

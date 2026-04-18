@@ -9,7 +9,7 @@ export const MailLog: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'mailNumber',
-    hidden: true,
+    group: 'Sekretariat',
     defaultColumns: ['date', 'mailType', 'mailNumber', 'senderOrRecipient'],
     description: 'Buku Agenda / Ekspedisi (Surat Masuk & Keluar)',
   },
