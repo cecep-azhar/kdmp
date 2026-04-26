@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+export const runtime = 'edge'
 import { getPayload } from 'payload'
 import config from '@payload-config'
 
