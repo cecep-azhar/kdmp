@@ -5,9 +5,8 @@ name = "kdmp"
 compatibility_date = "2024-04-01"
 compatibility_flags = ["nodejs_compat"]
 
-# For Next.js on Cloudflare Pages, build command and output directory
-build_command = "npm run build"
-pages_build_output_dir = ".next"
+# For Next.js on Cloudflare Pages, output directory
+pages_build_output_dir = ".vercel/output/static"
 
 # Environment variables to be set in Cloudflare Pages dashboard:
 # - DATABASE_URL: PostgreSQL connection string (Neon, Supabase, or other Postgres provider)
