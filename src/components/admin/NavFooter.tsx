@@ -6,7 +6,7 @@ const NavFooter = async () => {
   const payload = await getPayload({ config: configPromise })
   // @ts-ignore - types may not be generated yet
   const settings = await payload.findGlobal({ slug: 'settings' }) as any
-  const appName = settings?.appName || 'SIKDMP Sistem Informasi Koperasi Desa Merah Putih'
+  const appName = settings?.appName || 'SIKDM Sistem Informasi Koperasi Desa Merah Putih'
 
   return (
     <div style={{

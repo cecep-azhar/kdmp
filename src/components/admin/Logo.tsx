@@ -3,8 +3,8 @@
 import React from 'react'
 
 /**
- * KMP Logo Component
- * Represents: Kopi Desa Merah Putih - Merah dan Putih theme
+ * SIKDM Logo Component
+ * Represents: Sistem Informasi Koperasi Desa Merah Putih - Merah dan Putih theme
  */
 const Logo = ({ className = '' }: { className?: string }) => {
   return (
@@ -31,17 +31,17 @@ const Logo = ({ className = '' }: { className?: string }) => {
         <circle cx="50" cy="50" r="38" fill="#FFFFFF" />
         {/* Red center circle */}
         <circle cx="50" cy="50" r="28" fill="#DC2626" />
-        {/* KMP text */}
+        {/* SIKDM text */}
         <text
           x="50"
           y="56"
           fontFamily="Arial, sans-serif"
-          fontSize="22"
+          fontSize="20"
           fontWeight="bold"
           fill="#FFFFFF"
           textAnchor="middle"
         >
-          KMP
+          SIKDM
         </text>
       </svg>
 
@@ -52,7 +52,7 @@ const Logo = ({ className = '' }: { className?: string }) => {
           lineHeight: '1.2',
           color: 'var(--theme-text)',
         }}>
-          KMP
+          SIKDM
         </div>
         <div style={{
           fontSize: '11px',
@@ -61,7 +61,7 @@ const Logo = ({ className = '' }: { className?: string }) => {
           letterSpacing: '0.5px',
           textTransform: 'uppercase'
         }}>
-          Kopi Desa Merah Putih
+          Sistem Informasi Koperasi Desa Merah Putih
         </div>
       </div>
     </div>

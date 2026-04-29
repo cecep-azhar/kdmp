@@ -192,20 +192,32 @@ export const Loans: CollectionConfig = {
           })
 
           // Notify member about loan submission
-          await createNotification(req.payload, {
-            title: 'Pengajuan Pinjaman Submitted',
-            message: `Pengajuan pinjaman Anda sebesar Rp ${doc.amount?.toLocaleString('id-ID')} sedang menunggu persetujuan.`,
-            type: 'loan',
-            recipientId: typeof doc.member === 'object' ? (doc.member as { id?: number | string })?.id : doc.member,
-            relatedId: String(doc.id),
-            relatedType: 'loan',
+          const memberId = typeof doc.member === 'object' ? (doc.member as any)?.id : doc.member
+          const memberDoc = await req.payload.findByID({
+            collection: 'members',
+            id: memberId,
           })
+
+          if (memberDoc?.user) {
+            await createNotification(req.payload, {
+              title: 'Pengajuan Pinjaman Submitted',
+              message: `Pengajuan pinjaman Anda sebesar Rp ${doc.amount?.toLocaleString('id-ID')} sedang menunggu persetujuan.`,
+              type: 'loan',
+              recipientId: typeof memberDoc.user === 'object' ? (memberDoc.user as any).id : memberDoc.user,
+              relatedId: String(doc.id),
+              relatedType: 'loan',
+            })
+          }
         }
 
         // Handle status changes
         if (doc.status !== previousDoc?.status) {
           // FITUR #7: Approval workflow - notification on status change
-          const memberId = typeof doc.member === 'object' ? (doc.member as { id?: number | string })?.id : doc.member
+          const memberId = typeof doc.member === 'object' ? (doc.member as any)?.id : doc.member
+          const memberDoc = await req.payload.findByID({
+            collection: 'members',
+            id: memberId,
+          })
 
           switch (doc.status) {
             case 'approved':
@@ -217,15 +229,17 @@ export const Loans: CollectionConfig = {
                 recordId: doc.loanId,
                 description: `Pinjaman ${doc.loanId} disetujui`,
               })
-              await createNotification(req.payload, {
-                title: 'Pinjaman Disetujui',
-                message: `Pengajuan pinjaman ${doc.loanId} telah disetujui. Menunggu pencairan.`,
-                type: 'loan',
-                recipientId: memberId,
-                relatedId: String(doc.id),
-                relatedType: 'loan',
-                priority: 'high',
-              })
+              if (memberDoc?.user) {
+                await createNotification(req.payload, {
+                  title: 'Pinjaman Disetujui',
+                  message: `Pengajuan pinjaman ${doc.loanId} telah disetujui. Menunggu pencairan.`,
+                  type: 'loan',
+                  recipientId: typeof memberDoc.user === 'object' ? (memberDoc.user as any).id : memberDoc.user,
+                  relatedId: String(doc.id),
+                  relatedType: 'loan',
+                  priority: 'high',
+                })
+              }
               break
 
             case 'rejected':
@@ -237,38 +251,44 @@ export const Loans: CollectionConfig = {
                 recordId: doc.loanId,
                 description: `Pinjaman ${doc.loanId} ditolak`,
               })
-              await createNotification(req.payload, {
-                title: 'Pinjaman Ditolak',
-                message: `Pengajuan pinjaman ${doc.loanId} ditolak. ${doc.rejectionReason || ''}`,
-                type: 'loan',
-                recipientId: memberId,
-                relatedId: String(doc.id),
-                relatedType: 'loan',
-              })
+              if (memberDoc?.user) {
+                await createNotification(req.payload, {
+                  title: 'Pinjaman Ditolak',
+                  message: `Pengajuan pinjaman ${doc.loanId} ditolak. ${doc.rejectionReason || ''}`,
+                  type: 'loan',
+                  recipientId: typeof memberDoc.user === 'object' ? (memberDoc.user as any).id : memberDoc.user,
+                  relatedId: String(doc.id),
+                  relatedType: 'loan',
+                })
+              }
               break
 
             case 'active':
-              await createNotification(req.payload, {
-                title: 'Pinjaman dicairkan',
-                message: `Pinjaman ${doc.loanId} telah dicairkan. Silakan cek jadwal angsuran.`,
-                type: 'loan',
-                recipientId: memberId,
-                relatedId: String(doc.id),
-                relatedType: 'loan',
-                priority: 'high',
-              })
+              if (memberDoc?.user) {
+                await createNotification(req.payload, {
+                  title: 'Pinjaman dicairkan',
+                  message: `Pinjaman ${doc.loanId} telah dicairkan. Silakan cek jadwal angsuran.`,
+                  type: 'loan',
+                  recipientId: typeof memberDoc.user === 'object' ? (memberDoc.user as any).id : memberDoc.user,
+                  relatedId: String(doc.id),
+                  relatedType: 'loan',
+                  priority: 'high',
+                })
+              }
               break
 
             case 'completed':
-              await createNotification(req.payload, {
-                title: 'Pinjaman Lunas',
-                message: `Selamat! Pinjaman ${doc.loanId} telah lunas. Terima kasih atas kepercayaan Anda.`,
-                type: 'loan',
-                recipientId: memberId,
-                relatedId: String(doc.id),
-                relatedType: 'loan',
-                priority: 'high',
-              })
+              if (memberDoc?.user) {
+                await createNotification(req.payload, {
+                  title: 'Pinjaman Lunas',
+                  message: `Selamat! Pinjaman ${doc.loanId} telah lunas. Terima kasih atas kepercayaan Anda.`,
+                  type: 'loan',
+                  recipientId: typeof memberDoc.user === 'object' ? (memberDoc.user as any).id : memberDoc.user,
+                  relatedId: String(doc.id),
+                  relatedType: 'loan',
+                  priority: 'high',
+                })
+              }
               break
           }
         }

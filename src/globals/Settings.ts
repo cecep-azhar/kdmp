@@ -23,7 +23,7 @@ export const Settings: GlobalConfig = {
               type: 'text',
               label: 'Nama Aplikasi',
               required: true,
-              defaultValue: 'SIKDMP Sistem Informasi Kopi Desa Merah Putih',
+              defaultValue: 'SIKDM Sistem Informasi Koperasi Desa Merah Putih',
             },
             {
               name: 'appLogo',

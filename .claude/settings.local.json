@@ -5,7 +5,22 @@
       "Bash(npx payload *)",
       "Bash(pnpm list *)",
       "Bash(pnpm add *)",
-      "Bash(npx tsc *)"
+      "Bash(npx tsc *)",
+      "Bash(xargs grep *)",
+      "Bash(timeout 5 pnpm dev)",
+      "Bash(pnpm build *)",
+      "Bash(taskkill /F /IM node.exe)",
+      "Bash(pnpm dev *)",
+      "Bash(curl -s \"http://localhost:3000/api/seed/reset?confirm=true\")",
+      "Bash(npx tsx *)",
+      "Bash(npx ts-node *)",
+      "Bash(node -e \"require\\('tsx'\\)\")",
+      "Bash(npm list *)",
+      "Bash(node_modules/.pnpm/tsx*/node_modules/tsx/dist/cli.mjs --help)",
+      "Bash(node_modules/.pnpm/tsx*/node_modules/tsx/dist/cli.mjs run-seeder.ts --help)",
+      "Bash(node_modules/.pnpm/tsx*/node_modules/tsx/dist/cli.mjs run-seeder.ts)",
+      "Bash(PAYLOAD_SECRET=\"test-secret-for-cli\" node_modules/.pnpm/tsx*/node_modules/tsx/dist/cli.mjs run-seeder.ts)",
+      "Bash(pnpm tsx *)"
     ]
   }
 }

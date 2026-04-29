@@ -142,7 +142,7 @@ const ReportsView = () => {
       </div>
 
       <div style={{ marginTop: '40px', textAlign: 'center', fontSize: '12px', color: 'var(--theme-elevation-400)' }}>
-        Laporan digenerate otomatis berdasarkan data real-time sistem SIKDMP.
+        Laporan digenerate otomatis berdasarkan data real-time sistem SIKDM.
       </div>
     </div>
   )

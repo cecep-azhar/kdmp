@@ -40,7 +40,7 @@ export default function HomePage() {
         WebkitTextFillColor: 'transparent',
         textAlign: 'center',
       }}>
-        SIKDMP<br/>Koperasi Desa Merah Putih
+        SIKDM<br/>Sistem Informasi Koperasi Desa Merah Putih
       </h1>
 
       <p style={{
