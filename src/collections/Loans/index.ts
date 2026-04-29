@@ -125,12 +125,47 @@ export const Loans: CollectionConfig = {
           const paidInstallments = data.installmentSchedule.filter((i: Installment) => i.status === 'paid')
           const totalPaid = paidInstallments.reduce((sum: number, i: Installment) => sum + (i.total || 0), 0)
           data.totalPaid = totalPaid
-          data.remainingBalance = (data.amount || 0) * (1 + (data.interestRate || 0) / 100) - totalPaid
+
+          // Calculate remaining balance
+          const totalWithInterest = (data.amount || 0) * (1 + (data.interestRate || 0) / 100)
+          data.remainingBalance = totalWithInterest - totalPaid
 
           // If balance is 0 or less, mark as completed
           if (data.remainingBalance <= 0 && data.status === 'active') {
             data.status = 'completed'
           }
+        }
+
+        // FITUR #8: Calculate late penalty for overdue installments
+        if (data?.installmentSchedule && Array.isArray(data.installmentSchedule)) {
+          // Get late penalty rate from settings (default 0.5% per day)
+          let latePenaltyRate = 0.005 // 0.5%
+          try {
+            const settings = await req.payload.findGlobal({ slug: 'settings' }) as any
+            if (settings?.loanSettings?.latePenaltyPerDay) {
+              latePenaltyRate = (settings.loanSettings.latePenaltyPerDay || 0.5) / 100
+            }
+          } catch (e) {
+            // Use default
+          }
+
+          const today = new Date()
+          let totalPenalty = 0
+
+          data.installmentSchedule = data.installmentSchedule.map((inst: Installment) => {
+            if (inst.status === 'unpaid' || inst.status === 'overdue') {
+              const dueDate = new Date(inst.dueDate)
+              if (dueDate < today) {
+                const daysOverdue = Math.floor((today.getTime() - dueDate.getTime()) / (1000 * 60 * 60 * 24))
+                if (daysOverdue > 0) {
+                  inst.status = 'overdue'
+                  const penalty = Math.round(inst.total * latePenaltyRate * daysOverdue)
+                  totalPenalty += penalty
+                }
+              }
+            }
+            return inst
+          })
         }
 
         return data
