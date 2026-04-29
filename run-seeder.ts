@@ -2,6 +2,12 @@
 /**
  * KDMP Seeder CLI
  *
+ * Load .env otomatis
+ */
+import 'dotenv/config'
+
+/**
+ *
  * Seed semua data ke database via command line.
  * Logika sama persis dengan GET /api/seed/all
  *
@@ -207,7 +213,7 @@ async function seedLogs(p: any) {
   if (isDryRun) return { count: 1 }
   await p.create({
     collection: 'logs',
-    data: { date: new Date().toISOString(), title: 'Implementasi Sistem 16 Buku Administrasi', category: 'organizational' as const, importance: 'high' as const, content: 'Aplikasi SIKDMP sukses menerapkan 16 Buku Administrasi.', reportedBy: 'Super Admin' },
+    data: { date: new Date().toISOString(), title: 'Implementasi Sistem 16 Buku Administrasi', category: 'organizational' as const, importance: 'high' as const, content: 'Aplikasi SIKDM sukses menerapkan 16 Buku Administrasi.', reportedBy: 'Super Admin' },
   })
   return { count: 1 }
 }
@@ -231,7 +237,7 @@ async function seedAssets(p: any) {
     return { count: 0 }
   }
   if (isDryRun) return { count: 2 }
-  await p.create({ collection: 'assets', data: { assetCode: 'INV-2026-001', name: 'Komputer Kasir SIKDMP', category: 'electronics', acquisitionDate: '2026-04-03T00:00:00.000Z', acquisitionCost: 15000000, condition: 'good' } })
+  await p.create({ collection: 'assets', data: { assetCode: 'INV-2026-001', name: 'Komputer Kasir SIKDM', category: 'electronics', acquisitionDate: '2026-04-03T00:00:00.000Z', acquisitionCost: 15000000, condition: 'good' } })
   await p.create({ collection: 'assets', data: { assetCode: 'INV-2026-002', name: 'Printer Laser', category: 'electronics', acquisitionDate: '2026-04-03T00:00:00.000Z', acquisitionCost: 3500000, condition: 'good' } })
   return { count: 2 }
 }
@@ -373,7 +379,7 @@ async function main() {
   for (const step of steps) {
     try {
       process.stdout.write(`  ▶  ${step.label}... `)
-      const res = await step.fn(payload)
+      const res = (await step.fn(payload)) as { count: number; note?: string }
       results.push({ label: step.label, ...res })
       if (res.count === 0) {
         console.log(`⏭️  skip${res.note ? ` (${res.note})` : ''}`)
