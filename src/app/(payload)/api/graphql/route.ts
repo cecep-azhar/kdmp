@@ -1,5 +1,5 @@
 /* THIS FILE WAS GENERATED AUTOMATICALLY BY PAYLOAD. */
-export const runtime = 'edge'
+export const runtime = 'nodejs'
 /* DO NOT MODIFY IT BECAUSE IT COULD BE REWRITTEN AT ANY TIME. */
 import config from '@payload-config'
 import { GRAPHQL_POST } from '@payloadcms/next/routes'
