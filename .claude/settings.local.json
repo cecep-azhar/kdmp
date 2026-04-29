@@ -22,7 +22,8 @@
       "Bash(PAYLOAD_SECRET=\"test-secret-for-cli\" node_modules/.pnpm/tsx*/node_modules/tsx/dist/cli.mjs run-seeder.ts)",
       "Bash(pnpm tsx *)",
       "Bash(pnpm seed:dry)",
-      "Bash(node --env-file=.env --version)"
+      "Bash(node --env-file=.env --version)",
+      "Bash(pnpm seed *)"
     ]
   }
 }

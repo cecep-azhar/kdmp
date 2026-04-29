@@ -5,6 +5,8 @@ const nextConfig = {
   experimental: {
     reactCompiler: false,
   },
+  // Keep heavy Payload dependencies out of lightweight API routes
+  serverExternalPackages: ['payload', '@payloadcms/next'],
 }
 
 export default withPayload(nextConfig)

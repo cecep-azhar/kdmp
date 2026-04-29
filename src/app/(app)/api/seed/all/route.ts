@@ -224,29 +224,19 @@ async function seedEmployees(p: any): Promise<{ count: number; note?: string }> 
   const hasData = await collectionHasData(p, 'employees')
   if (hasData) return { count: 0, note: 'already seeded' }
 
-  const members = await p.find({ collection: 'members', limit: 3, page: 3 })
-  const roles = [
-    { position: 'manager' as const, department: 'Umum' },
-    { position: 'teller' as const, department: 'Simpan Pinjam' },
-    { position: 'admin' as const, department: 'Keuangan' },
-  ]
+  const members = await p.find({ collection: 'members', limit: 1 })
+  if (members.docs.length === 0) return { count: 0, note: 'no members found' }
 
-  let created = 0
-  for (let i = 0; i < Math.min(members.docs.length, 3); i++) {
-    await p.create({
-      collection: 'employees',
-      data: {
-        member: members.docs[i].id,
-        position: roles[i].position,
-        department: roles[i].department,
-        joinDate: '2025-06-01T00:00:00.000Z',
-        employmentStatus: 'contract',
-        status: 'active',
-      },
-    })
-    created++
-  }
-  return { count: created }
+  await p.create({
+    collection: 'employees',
+    data: {
+      member: members.docs[0].id,
+      position: 'Manajer',
+      hireDate: '2025-06-01T00:00:00.000Z',
+      status: 'active',
+    },
+  })
+  return { count: 1 }
 }
 
 // ─── Seed: Savings ────────────────────────────────────────────────────────────
@@ -298,7 +288,7 @@ async function seedLoans(p: any): Promise<{ count: number; note?: string }> {
   const members = await p.find({ collection: 'members', limit: 5 })
   if (members.docs.length === 0) return { count: 0, note: 'no members found' }
 
-  const purposes = ['productive' as const, 'consumption' as const, 'emergency' as const]
+  const purposes = ['productive' as const, 'consumptive' as const, 'health' as const]
   let created = 0
   for (let i = 0; i < members.docs.length; i++) {
     await p.create({
@@ -325,7 +315,7 @@ async function seedGuestBook(p: any): Promise<{ count: number; note?: string }> 
 
   const entries = [
     { guestName: 'Drs. Supriadi', title: 'Kepala Dinas Kopearasi', organization: 'Dinas Kopearasi Kab. Bandung', purpose: 'visit' as const, followUpActions: 'Koordinasi program tahunan' },
-    { guestName: 'Prof. Dr. H. Mahmud', title: 'Akademisi', organization: 'Universitas Padjadjaran', purpose: 'research' as const, followUpActions: 'Observasi sistem koprasi' },
+    { guestName: 'Prof. Dr. H. Mahmud', title: 'Akademisi', organization: 'Universitas Padjadjaran', purpose: 'coaching' as const, followUpActions: 'Observasi sistem koprasi' },
   ]
 
   for (const entry of entries) {
@@ -383,7 +373,9 @@ async function seedLogs(p: any): Promise<{ count: number; note?: string }> {
       title: 'Implementasi Sistem 16 Buku Administrasi',
       category: 'organizational' as const,
       importance: 'high' as const,
-      content: 'Aplikasi SIKDM sukses menerapkan format standar 16 Buku Administrasi Koprasi Indonesia.',
+      content: {
+        root: { type: 'root', format: '', indent: 0, version: 1, children: [{ type: 'paragraph', format: '', indent: 0, version: 1, children: [{ detail: 0, format: 0, mode: 'normal', style: '', text: 'Aplikasi SIKDMP sukses menerapkan format standar 16 Buku Administrasi Koprasi Indonesia.', type: 'text', version: 1 }] }] },
+      },
       reportedBy: 'Super Admin',
     },
   })

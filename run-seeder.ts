@@ -164,6 +164,27 @@ async function seedOrg(p: any, collection: string, position: string, positionLab
   return { count: 1 }
 }
 
+async function seedEmployees(p: any) {
+  const count = (await p.count({ collection: 'employees' })).totalDocs
+  if (count > 0) {
+    verbose('employees: already has data')
+    return { count: 0 }
+  }
+  if (isDryRun) return { count: 1, note: 'would create 1 employee' }
+  const members = await p.find({ collection: 'members', limit: 1 })
+  if (members.docs.length === 0) return { count: 0, note: 'no members found' }
+  await p.create({
+    collection: 'employees',
+    data: {
+      member: members.docs[0].id,
+      position: 'Manajer',
+      hireDate: '2025-06-01T00:00:00.000Z',
+      status: 'active',
+    },
+  })
+  return { count: 1 }
+}
+
 async function seedGuestBook(p: any) {
   if (await hasData(p, 'guest-book')) {
     verbose('guest-book sudah ada')
@@ -171,7 +192,7 @@ async function seedGuestBook(p: any) {
   }
   if (isDryRun) return { count: 2, note: 'would create 2 entries' }
   await p.create({ collection: 'guest-book', data: { date: new Date().toISOString(), guestName: 'Drs. Supriadi', title: 'Kepala Dinas Kopearasi', organization: 'Dinas Kopearasi Kab. Bandung', purpose: 'visit', followUpActions: 'Koordinasi program' } })
-  await p.create({ collection: 'guest-book', data: { date: new Date().toISOString(), guestName: 'Prof. Dr. H. Mahmud', title: 'Akademisi', organization: 'Universitas Padjadjaran', purpose: 'research', followUpActions: 'Observasi sistem' } })
+  await p.create({ collection: 'guest-book', data: { date: new Date().toISOString(), guestName: 'Prof. Dr. H. Mahmud', title: 'Akademisi', organization: 'Universitas Padjadjaran', purpose: 'coaching', followUpActions: 'Observasi sistem' } })
   return { count: 2 }
 }
 
@@ -213,7 +234,16 @@ async function seedLogs(p: any) {
   if (isDryRun) return { count: 1 }
   await p.create({
     collection: 'logs',
-    data: { date: new Date().toISOString(), title: 'Implementasi Sistem 16 Buku Administrasi', category: 'organizational' as const, importance: 'high' as const, content: 'Aplikasi SIKDM sukses menerapkan 16 Buku Administrasi.', reportedBy: 'Super Admin' },
+    data: {
+      date: new Date().toISOString(),
+      title: 'Implementasi Sistem 16 Buku Administrasi',
+      category: 'organizational' as const,
+      importance: 'high' as const,
+      content: {
+        root: { type: 'root', format: '', indent: 0, version: 1, children: [{ type: 'paragraph', format: '', indent: 0, version: 1, children: [{ detail: 0, format: 0, mode: 'normal', style: '', text: 'Aplikasi SIKDMP sukses menerapkan 16 Buku Administrasi Koprasi sesuai standar pemerintah Indonesia.', type: 'text', version: 1 }] }] },
+      },
+      reportedBy: 'Super Admin',
+    },
   })
   return { count: 1 }
 }
@@ -316,7 +346,7 @@ async function seedLoans(p: any) {
   }
   if (isDryRun) return { count: 3, note: 'would create 3 loans' }
   const members = await p.find({ collection: 'members', limit: 3 })
-  const purposes = ['productive' as const, 'consumption' as const, 'emergency' as const]
+  const purposes = ['productive' as const, 'consumptive' as const, 'health' as const]
   for (let i = 0; i < members.docs.length; i++) {
     await p.create({
       collection: 'loans',
@@ -335,7 +365,7 @@ const steps = [
   { label: 'Members (Dummy 25)', fn: seedDummyMembers },
   { label: 'Pengurus (Board Members)', fn: (p: any) => seedOrg(p, 'board-members', 'chairman', 'board member') },
   { label: 'Pengawas (Supervisors)', fn: (p: any) => seedOrg(p, 'supervisors', 'head', 'supervisor') },
-  { label: 'Karyawan (Employees)', fn: (p: any) => seedOrg(p, 'employees', 'manager', 'employee') },
+  { label: 'Karyawan (Employees)', fn: seedEmployees },
   { label: 'Simpanan (Savings)', fn: seedSavings },
   { label: 'Pinjaman (Loans)', fn: seedLoans },
   { label: 'Buku Tamu (Guest Book)', fn: seedGuestBook },
