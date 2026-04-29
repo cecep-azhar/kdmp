@@ -7,6 +7,7 @@ const nextConfig = {
   },
   // Keep heavy Payload dependencies out of lightweight API routes
   serverExternalPackages: ['payload', '@payloadcms/next'],
+  transpilePackages: ['react-image-crop'],
 }
 
 export default withPayload(nextConfig)
