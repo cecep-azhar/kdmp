@@ -5,9 +5,13 @@ const nextConfig = {
   experimental: {
     reactCompiler: false,
   },
-  // Keep heavy Payload dependencies out of lightweight API routes
-  serverExternalPackages: ['payload', '@payloadcms/next'],
-  transpilePackages: ['react-image-crop'],
+  // Transpile Payload and its UI dependencies to handle CSS imports and ESM compatibility
+  transpilePackages: [
+    '@payloadcms/next',
+    '@payloadcms/ui',
+    '@payloadcms/richtext-lexical',
+    'react-image-crop',
+  ],
 }
 
 export default withPayload(nextConfig)

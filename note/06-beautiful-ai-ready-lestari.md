@@ -1,4 +1,5 @@
 # KDMP - Beautiful.ai Presentation Script
+
 ## Format Copy-Paste Ready untuk Beautiful.ai Slides
 
 ---
@@ -6,21 +7,24 @@
 ## SLIDE 1: Cover/Title Slide
 
 **TITLE:**
+
 ```
 Sistem Informasi
 Koperasi Desa Merah Putih
 ```
 
 **SUBTITLE:**
+
 ```
 Solusi Digital untuk
 Koperasi Modern & Transparan
 ```
 
 **PRESENTER NOTES:**
+
 ```
-Selamat datang! Hari ini kita akan memperkenalkan Sistem Informasi 
-Koperasi Desa Merah Putih (KDMP) - solusi digital untuk mengelola 
+Selamat datang! Hari ini kita akan memperkenalkan Sistem Informasi
+Koperasi Desa Merah Putih (KDMP) - solusi digital untuk mengelola
 operasional cooperativa secara modern, efisien, dan transparan.
 ```
 
@@ -29,30 +33,33 @@ operasional cooperativa secara modern, efisien, dan transparan.
 ## SLIDE 2: Latar Belakang
 
 **TITLE:**
+
 ```
 Mengapa KDMP Hadir?
 ```
 
-**CONTENT (2 columns):
-
+\*\*CONTENT (2 columns):
 
 **LEFT COLUMN - "Tantangan Lama":**
+
 - Pencatatan manual yang rawan kesalahan
 - Anggota sulit akses data sendiri
 - Laporan membutuhkan waktu berhari-hari
 - Transparansi yang rendah
 
 **RIGHT COLUMN - "Solusi KDMP":**
+
 - Otomasi seluruh proses pembukuan
 - Akses real-time 24/7
 - Laporan instan siap pakai
 - Full transparency untuk anggota
 
 **PRESENTER NOTES:**
+
 ```
-Sebelum sistem digital, cooperativas menghadapi banyak tantangan. 
-Pencatatan manual rentan salah, anggota harus datang ke kantor untuk 
-cek saldo, dan penyusunan laporan memakan waktu lama. KDMP hadir 
+Sebelum sistem digital, cooperativas menghadapi banyak tantangan.
+Pencatatan manual rentan salah, anggota harus datang ke kantor untuk
+cek saldo, dan penyusunan laporan memakan waktu lama. KDMP hadir
 untuk menyelesaikan semua masalah ini.
 ```
 
@@ -61,6 +68,7 @@ untuk menyelesaikan semua masalah ini.
 ## SLIDE 3: Arsitektur Sistem
 
 **TITLE:**
+
 ```
 Dua Aplikasi, Satu Database
 ```
@@ -98,10 +106,11 @@ Dua Aplikasi, Satu Database
 ```
 
 **PRESENTER NOTES:**
+
 ```
-Sistem KDMP terdiri dari dua aplikasi yang terhubung ke satu database. 
-Aplikasi Admin untuk petugas mengelola data, Aplikasi Member untuk 
-anggota mengakses informasi mereka sendiri. Semua data tersimpan 
+Sistem KDMP terdiri dari dua aplikasi yang terhubung ke satu database.
+Aplikasi Admin untuk petugas mengelola data, Aplikasi Member untuk
+anggota mengakses informasi mereka sendiri. Semua data tersimpan
 terpusat sehingga tidak ada duplikasi atau ketidaksesuaian data.
 ```
 
@@ -110,6 +119,7 @@ terpusat sehingga tidak ada duplikasi atau ketidaksesuaian data.
 ## SLIDE 4: Fitur Utama Admin
 
 **TITLE:**
+
 ```
 Kelola Semua dari Satu Dashboard
 ```
@@ -117,20 +127,21 @@ Kelola Semua dari Satu Dashboard
 **CONTENT (grid 2x3):**
 
 | **Simpan Pinjam** | **16 Buku Admin** | **Jurnal Otomatis** |
-|-------------------|-------------------|---------------------|
-| Setor/tarik | Daftar anggota | Setiap transaksi |
-| Pinjaman | Pengurus | langsung masuk |
-| Angsuran | Kas | buku besar |
+| ----------------- | ----------------- | ------------------- |
+| Setor/tarik       | Daftar anggota    | Setiap transaksi    |
+| Pinjaman          | Pengurus          | langsung masuk      |
+| Angsuran          | Kas               | buku besar          |
 
 | **Laporan SHU** | **Point of Sale** | **Notifikasi** |
-|-----------------|-------------------|----------------|
-| Hitung bagi | Kelola toko | Alerts untuk |
-| hasil otomatis | cooperativa | angsuran jatuh |
+| --------------- | ----------------- | -------------- |
+| Hitung bagi     | Kelola toko       | Alerts untuk   |
+| hasil otomatis  | cooperativa       | angsuran jatuh |
 
 **PRESENTER NOTES:**
+
 ```
-Dashboard admin memberikan akses ke semua fitur utama: pengelolaan 
-simpanan dan pinjaman, 16 buku administrasi yang wajib, jurnal yang 
+Dashboard admin memberikan akses ke semua fitur utama: pengelolaan
+simpanan dan pinjaman, 16 buku administrasi yang wajib, jurnal yang
 terposting otomatis, perhitungan SHU, kasir toko, dan sistem notifikasi.
 ```
 
@@ -139,37 +150,39 @@ terposting otomatis, perhitungan SHU, kasir toko, dan sistem notifikasi.
 ## SLIDE 5: Fitur Utama Member
 
 **TITLE:**
+
 ```
 Kemudahan untuk Anggota
 ```
 
 **CONTENT (list with icons):**
 
-| 🏠 | **Dashboard Personal** |
-|----|------------------------|
-| | Selalu tahu saldo & status |
+| 🏠  | **Dashboard Personal**     |
+| --- | -------------------------- |
+|     | Selalu tahu saldo & status |
 
-| 📊 | **Riwayat Transaksi** |
-|----|------------------------|
-| | Setoran, penarikan, angsuran |
+| 📊  | **Riwayat Transaksi**        |
+| --- | ---------------------------- |
+|     | Setoran, penarikan, angsuran |
 
-| 💳 | **Ajukan Pinjaman** |
-|----|----------------------|
-| | Kalkulasi otomatis |
+| 💳  | **Ajukan Pinjaman** |
+| --- | ------------------- |
+|     | Kalkulasi otomatis  |
 
-| 📰 | **Berita & Info** |
-|----|-------------------|
-| | Pengumuman terkini |
+| 📰  | **Berita & Info**  |
+| --- | ------------------ |
+|     | Pengumuman terkini |
 
-| 💬 | **Kritik & Saran** |
-|----|---------------------|
-| | Komunikasi langsung |
+| 💬  | **Kritik & Saran**  |
+| --- | ------------------- |
+|     | Komunikasi langsung |
 
 **PRESENTER NOTES:**
+
 ```
-Aplikasi member memberikan kemandirian bagi anggota. Mereka bisa 
-melihat saldo kapan saja, mengajukan pinjaman dengan simulasi 
-angsuran, membaca berita cooperativa, dan mengirim kritik saran 
+Aplikasi member memberikan kemandirian bagi anggota. Mereka bisa
+melihat saldo kapan saja, mengajukan pinjaman dengan simulasi
+angsuran, membaca berita cooperativa, dan mengirim kritik saran
 tanpa harus datang ke kantor.
 ```
 
@@ -178,6 +191,7 @@ tanpa harus datang ke kantor.
 ## SLIDE 6: Alur Setup Master Data
 
 **TITLE:**
+
 ```
 Mulai dalam 5 Langkah
 ```
@@ -211,10 +225,11 @@ Aset                                            Simpanan
 ```
 
 **PRESENTER NOTES:**
+
 ```
-Setup awal sangat mudah. Pertama buat akun admin utama, lalu setup 
-chart of accounts default yang sudah kami siapkan. Input anggota 
-bisa satu-satu atau import Excel. Terakhir, input produk dan aset. 
+Setup awal sangat mudah. Pertama buat akun admin utama, lalu setup
+chart of accounts default yang sudah kami siapkan. Input anggota
+bisa satu-satu atau import Excel. Terakhir, input produk dan aset.
 Setelah ini, sistem sudah siap digunakan.
 ```
 
@@ -223,6 +238,7 @@ Setelah ini, sistem sudah siap digunakan.
 ## SLIDE 7: Alur Transaksi Simpanan
 
 **TITLE:**
+
 ```
 Proses Simpanan - 3 Menit Selesai
 ```
@@ -270,10 +286,11 @@ Proses Simpanan - 3 Menit Selesai
 ```
 
 **PRESENTER NOTES:**
+
 ```
-Transaksi simpanan sangat cepat. Petugas tinggal pilih anggota, 
-pilih jenis simpanan, masukkan jumlah. Sistem otomatis generate 
-ID, update saldo, dan posting ke jurnal. Anggota langsung dapat 
+Transaksi simpanan sangat cepat. Petugas tinggal pilih anggota,
+pilih jenis simpanan, masukkan jumlah. Sistem otomatis generate
+ID, update saldo, dan posting ke jurnal. Anggota langsung dapat
 bukti transaksi.
 ```
 
@@ -282,6 +299,7 @@ bukti transaksi.
 ## SLIDE 8: Alur Pinjaman
 
 **TITLE:**
+
 ```
 Pinjaman - Dari Ajuan hingga Lunas
 ```
@@ -343,11 +361,12 @@ Pinjaman - Dari Ajuan hingga Lunas
 ```
 
 **PRESENTER NOTES:**
+
 ```
-Alur pinjaman lengkap dari pengajuan sampai lunas. Anggota bisa 
-ajukan via aplikasi, admin review kelayakan, setelah disetujui 
-dicairkan dan jadwal angsuran langsung dibuat otomatis. Setiap 
-pembayaran angsuran langsung posting ke jurnal. Saat lunas, 
+Alur pinjaman lengkap dari pengajuan sampai lunas. Anggota bisa
+ajukan via aplikasi, admin review kelayakan, setelah disetujui
+dicairkan dan jadwal angsuran langsung dibuat otomatis. Setiap
+pembayaran angsuran langsung posting ke jurnal. Saat lunas,
 sistem otomatis update status.
 ```
 
@@ -356,6 +375,7 @@ sistem otomatis update status.
 ## SLIDE 9: Jurnal Otomatis
 
 **TITLE:**
+
 ```
 Setiap Transaksi = 1 Jurnal Entry
 ```
@@ -401,10 +421,11 @@ Setiap Transaksi = 1 Jurnal Entry
 ```
 
 **PRESENTER NOTES:**
+
 ```
-Ini adalah fitur kunci KDMP. Setiap transaksi - setoran, penarikan, 
-pinjaman, angsuran - otomatis membuat jurnal entry. Ini berarti 
-Buku Kas selalu akurat tanpa input manual. Laporan keuangan 
+Ini adalah fitur kunci KDMP. Setiap transaksi - setoran, penarikan,
+pinjaman, angsuran - otomatis membuat jurnal entry. Ini berarti
+Buku Kas selalu akurat tanpa input manual. Laporan keuangan
 bisa dihasilkan kapan saja dengan data yang reliable.
 ```
 
@@ -413,6 +434,7 @@ bisa dihasilkan kapan saja dengan data yang reliable.
 ## SLIDE 10: Perhitungan SHU
 
 **TITLE:**
+
 ```
 Hitung SHU dalam Sekejap
 ```
@@ -453,11 +475,12 @@ Hitung SHU dalam Sekejap
 ```
 
 **PRESENTER NOTES:**
+
 ```
-Perhitungan SHU yang biasanya memakan waktu berminggu-minggu 
-sekarang bisa dilakukan instan. Sistem sudah menghitung otomatis 
-berdasarkan semua transaksi tahun berjalan. Tinggal allocate 
-sesuai ketentuan: minimal 20% untuk cadangan, sisanya untuk 
+Perhitungan SHU yang biasanya memakan waktu berminggu-minggu
+sekarang bisa dilakukan instan. Sistem sudah menghitung otomatis
+berdasarkan semua transaksi tahun berjalan. Tinggal allocate
+sesuai ketentuan: minimal 20% untuk cadangan, sisanya untuk
 anggota.
 ```
 
@@ -466,6 +489,7 @@ anggota.
 ## SLIDE 11: Distribusi SHU per Anggota
 
 **TITLE:**
+
 ```
 Adil & Transparan
 ```
@@ -509,10 +533,11 @@ Adil & Transparan
 ```
 
 **PRESENTER NOTES:**
+
 ```
-Distribusi SHU menggunakan dua metrik: jasa modal berdasarkan 
-simpanan dan jasa anggota berdasarkan transaksi. Ini sesuai 
-dengan aturan cooperativas. Perhitungan otomatis per anggota, 
+Distribusi SHU menggunakan dua metrik: jasa modal berdasarkan
+simpanan dan jasa anggota berdasarkan transaksi. Ini sesuai
+dengan aturan cooperativas. Perhitungan otomatis per anggota,
 tinggal export untuk RAT.
 ```
 
@@ -521,6 +546,7 @@ tinggal export untuk RAT.
 ## SLIDE 12: 16 Buku - Terpenuhi Otomatis
 
 **TITLE:**
+
 ```
 16 Buku Administrasi Cooperativa
 ```
@@ -552,10 +578,11 @@ tinggal export untuk RAT.
 ```
 
 **PRESENTER NOTES:**
+
 ```
-KDMP memenuhi seluruh 16 buku administrasi yang diwajibkan 
-untuk cooperatives Indonesia. Tidak hanya tersedia, semua buku 
-saling terintegrasi. Input di satu tempat langsung reflect 
+KDMP memenuhi seluruh 16 buku administrasi yang diwajibkan
+untuk cooperatives Indonesia. Tidak hanya tersedia, semua buku
+saling terintegrasi. Input di satu tempat langsung reflect
 di buku terkait. Siap untuk audit kapan saja.
 ```
 
@@ -564,6 +591,7 @@ di buku terkait. Siap untuk audit kapan saja.
 ## SLIDE 13: Keamanan & Akses
 
 **TITLE:**
+
 ```
 Siapa Bisa Melihat Apa?
 ```
@@ -601,11 +629,12 @@ Siapa Bisa Melihat Apa?
 ```
 
 **PRESENTER NOTES:**
+
 ```
-Sistem keamanan menggunakan Role-Based Access Control. Super Admin 
-bisa akses semuanya. Pengurus bisa approve dan manage operasional. 
-Pengawas bisa monitoring. Staff input transaksi. Anggota hanya 
-bisa melihat dan mengelola datanya sendiri. Tidak ada data yang 
+Sistem keamanan menggunakan Role-Based Access Control. Super Admin
+bisa akses semuanya. Pengurus bisa approve dan manage operasional.
+Pengawas bisa monitoring. Staff input transaksi. Anggota hanya
+bisa melihat dan mengelola datanya sendiri. Tidak ada data yang
 bisa diakses di luar wewenang.
 ```
 
@@ -614,6 +643,7 @@ bisa diakses di luar wewenang.
 ## SLIDE 14: Teknologi
 
 **TITLE:**
+
 ```
 Built on Modern Stack
 ```
@@ -654,10 +684,11 @@ Built on Modern Stack
 ```
 
 **PRESENTER NOTES:**
+
 ```
-KDMP dibangun dengan teknologi modern dan scalable. Frontend pakai 
-Next.js React yang cepat dan SEO-friendly. Backend pakai Payload 
-CMS yang flexible. Database PostgreSQL yang enterprise-grade. 
+KDMP dibangun dengan teknologi modern dan scalable. Frontend pakai
+Next.js React yang cepat dan SEO-friendly. Backend pakai Payload
+CMS yang flexible. Database PostgreSQL yang enterprise-grade.
 Cloud-ready - bisa deploy di mana saja, storage S3, CDN support.
 ```
 
@@ -666,6 +697,7 @@ Cloud-ready - bisa deploy di mana saja, storage S3, CDN support.
 ## SLIDE 15: Ringkasan Benefit
 
 **TITLE:**
+
 ```
 Benefits in Numbers
 ```
@@ -697,10 +729,11 @@ Benefits in Numbers
 ```
 
 **PRESENTER NOTES:**
+
 ```
-Mari kita rangkum benefits KDMP. Waktu proses 90% lebih cepat. 
-Transparansi penuh - anggota bisa cek sendiri. Efisiensi biaya 
-operasional. Dan yang paling penting - akurasi perhitungan 
+Mari kita rangkum benefits KDMP. Waktu proses 90% lebih cepat.
+Transparansi penuh - anggota bisa cek sendiri. Efisiensi biaya
+operasional. Dan yang paling penting - akurasi perhitungan
 yang tidak bisa dijamin dengan sistem manual.
 ```
 
@@ -709,6 +742,7 @@ yang tidak bisa dijamin dengan sistem manual.
 ## SLIDE 16: Next Steps
 
 **TITLE:**
+
 ```
 Mulai Perjalanan Digital Anda
 ```
@@ -745,10 +779,11 @@ Mulai Perjalanan Digital Anda
 ```
 
 **PRESENTER NOTES:**
+
 ```
-Implementasi KDMP bisa dimulai segera. Proses tipikal 3 minggu: 
-minggu pertama setup server dan install, minggu kedua input data 
-master, minggu ketiga go live dan training. Tim kami siap 
+Implementasi KDMP bisa dimulai segera. Proses tipikal 3 minggu:
+minggu pertama setup server dan install, minggu kedua input data
+master, minggu ketiga go live dan training. Tim kami siap
 mendukung dari awal sampai operasional.
 ```
 
@@ -757,6 +792,7 @@ mendukung dari awal sampai operasional.
 ## SLIDE 17: Q&A
 
 **TITLE:**
+
 ```
 Tanya Jawab
 ```
@@ -788,8 +824,9 @@ Tanya Jawab
 ```
 
 **PRESENTER NOTES:**
+
 ```
-Terima kasih atas perhatiannya. Sekarang saya buka sesi tanya 
+Terima kasih atas perhatiannya. Sekarang saya buka sesi tanya
 jawab untuk membahas hal-hal yang ingin ditanyakan lebih lanjut.
 ```
 
@@ -798,6 +835,7 @@ jawab untuk membahas hal-hal yang ingin ditanyakan lebih lanjut.
 ## SLIDE 18: Thank You
 
 **TITLE:**
+
 ```
 Terima Kasih
 ```
@@ -808,7 +846,7 @@ Terima Kasih
 ┌─────────────────────────────────────────────────────────────┐
 │                                                             │
 │                                                             │
-│                    🏛️ KOPI DESA                             │
+│                    🏛️ KOPERASI DESA                             │
 │                    MERAH PUTIH                              │
 │                                                             │
 │                                                             │
@@ -830,8 +868,9 @@ Terima Kasih
 ```
 
 **PRESENTER NOTES:**
+
 ```
-Terima kasih atas waktu dan perhatiannya. KDMP siap membantu 
+Terima kasih atas waktu dan perhatiannya. KDMP siap membantu
 cooperativa Anda memasuki era digital. Salam transparan!
 ```
 
@@ -883,4 +922,4 @@ TIPS PRESENTASI
 
 ---
 
-*Generated for KDMP Presentation | Beautiful.ai Ready Format*
+_Generated for KDMP Presentation | Beautiful.ai Ready Format_

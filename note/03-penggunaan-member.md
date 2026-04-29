@@ -7,7 +7,7 @@
 3. Masukkan **Email** & **Password** anggota
 4. Klik **Masuk**
 
-> *Akun anggota dibuat oleh admin saat mendaftar*
+> _Akun anggota dibuat oleh admin saat mendaftar_
 
 ---
 
@@ -15,7 +15,7 @@
 
 ```
 ┌─────────────────────────────────────────────────────┐
-│ ☰   KOPI DESA MERAH PUTIH           [🔔] [👤]    │
+│ ☰   KOPERASI DESA MERAH PUTIH           [🔔] [👤]    │
 ├─────────────────────────────────────────────────────┤
 │                                                      │
 │  Halo, [Nama Anggota]                               │
@@ -35,13 +35,13 @@
 
 ## Menu Utama Member
 
-| Menu | Fungsi |
-|------|--------|
-| **Simpanan** | Lihat saldo & riwayat simpanan |
-| **Pinjaman** | Lihat pinjaman aktif & jadwal angsuran |
-| **Pengajuan** | Ajukan pinjaman baru |
-| **Toko** | Belanja di toko cooperative |
-| **Profil** | Lihat & edit data diri |
+| Menu          | Fungsi                                 |
+| ------------- | -------------------------------------- |
+| **Simpanan**  | Lihat saldo & riwayat simpanan         |
+| **Pinjaman**  | Lihat pinjaman aktif & jadwal angsuran |
+| **Pengajuan** | Ajukan pinjaman baru                   |
+| **Toko**      | Belanja di toko cooperative            |
+| **Profil**    | Lihat & edit data diri                 |
 
 ---
 
@@ -70,6 +70,7 @@
 ### Simulasi Angsuran
 
 > Kalkulator di halaman pengajuan menghitung otomatis:
+>
 > - Angsuran per bulan
 > - Total bunga
 > - Total pembayaran
@@ -88,26 +89,29 @@
 
 ### Jadwal Angsuran
 
-| Angsuran Ke | Jatuh Tempo | Pokok | Bunga | Total | Status |
-|-------------|-------------|-------|-------|-------|--------|
-| 1 | 2026-05-01 | XXX | XXX | XXX | ✅ Lunas |
-| 2 | 2026-06-01 | XXX | XXX | XXX | ⏳ Belum |
-| 3 | 2026-07-01 | XXX | XXX | XXX | ⏳ Belum |
+| Angsuran Ke | Jatuh Tempo | Pokok | Bunga | Total | Status   |
+| ----------- | ----------- | ----- | ----- | ----- | -------- |
+| 1           | 2026-05-01  | XXX   | XXX   | XXX   | ✅ Lunas |
+| 2           | 2026-06-01  | XXX   | XXX   | XXX   | ⏳ Belum |
+| 3           | 2026-07-01  | XXX   | XXX   | XXX   | ⏳ Belum |
 
 ---
 
 ## Fitur Lainnya
 
 ### Toko / POS
+
 - Akses ke toko cooperative
 - Belanja kebutuhan sehari-hari
 - Pembayaran bisa potong simpanan
 
 ### Berita
+
 - Lihat pengumuman terbaru dari cooperative
 - Edukasi keuangan & info lainnya
 
 ### Kritik & Saran
+
 - Kirim masukan ke pengurus
 - Lihat tanggapan dari admin
 
@@ -124,9 +128,10 @@
 
 ## Butuh Bantuan?
 
-| Masalah | Solusi |
-|---------|--------|
-| Lupa password | Hubungi admin untuk reset |
+| Masalah          | Solusi                         |
+| ---------------- | ------------------------------ |
+| Lupa password    | Hubungi admin untuk reset      |
 | Data tidak cocok | Screenshot & laporkan ke admin |
-| Ada pertanyaan | Gunakan form Kritik/Saran |
+| Ada pertanyaan   | Gunakan form Kritik/Saran      |
+
 |butuhkan penjelasan fitur
