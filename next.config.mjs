@@ -6,11 +6,10 @@ const nextConfig = {
   experimental: {
     reactCompiler: false,
   },
-  // Keep large Payload core packages external to reduce serverless function size
-  serverExternalPackages: ['payload', '@payloadcms/next'],
-  // Transpile Payload and its UI dependencies to handle CSS imports and ESM compatibility
+  // Keep heavy Payload core out of lightweight routes (reduces serverless bundle size)
+  serverExternalPackages: ['payload'],
+  // Transpile UI packages for CSS/ESM compatibility
   transpilePackages: [
-    '@payloadcms/next',
     '@payloadcms/ui',
     '@payloadcms/richtext-lexical',
     'react-image-crop',
