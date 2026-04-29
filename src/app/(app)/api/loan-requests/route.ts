@@ -84,7 +84,37 @@ export async function POST(request: Request) {
       )
     }
 
-    // Validasi input
+    // BUG FIX #11: Get loan settings from global Settings instead of hardcoded
+    // Default values as fallback
+    const defaultInterestRate = 12
+    const minLoanAmount = 500000
+    const maxLoanAmount = 50000000
+    const maxTenorMonths = 60
+
+    // Ambil settings dari global Settings
+    let loanSettings = {
+      defaultInterestRate,
+      minLoanAmount,
+      maxLoanAmount,
+      maxTenorMonths,
+    }
+
+    try {
+      const settings = await payload.findGlobal({ slug: 'settings' }) as any
+      if (settings?.loanSettings) {
+        loanSettings = {
+          defaultInterestRate: settings.loanSettings.defaultInterestRate || defaultInterestRate,
+          minLoanAmount: settings.loanSettings.minLoanAmount || minLoanAmount,
+          maxLoanAmount: settings.loanSettings.maxLoanAmount || maxLoanAmount,
+          maxTenorMonths: settings.loanSettings.maxTenorMonths || maxTenorMonths,
+        }
+      }
+    } catch (e) {
+      // Use defaults if settings not available
+      console.warn('Could not load loan settings, using defaults')
+    }
+
+    // Validasi input dengan settings dari database
     if (!body.amount || body.amount <= 0) {
       return NextResponse.json(
         { error: 'Jumlah pinjaman harus lebih dari 0' },
@@ -92,21 +122,35 @@ export async function POST(request: Request) {
       )
     }
 
-    if (!body.tenor || body.tenor < 1 || body.tenor > 60) {
+    if (body.amount < loanSettings.minLoanAmount) {
       return NextResponse.json(
-        { error: 'Tenor harus antara 1-60 bulan' },
+        { error: `Minimum pinjaman adalah Rp ${loanSettings.minLoanAmount.toLocaleString('id-ID')}` },
         { status: 400 },
       )
     }
 
-    // Buat pengajuan pinjaman
+    if (body.amount > loanSettings.maxLoanAmount) {
+      return NextResponse.json(
+        { error: `Maximum pinjaman adalah Rp ${loanSettings.maxLoanAmount.toLocaleString('id-ID')}` },
+        { status: 400 },
+      )
+    }
+
+    if (!body.tenor || body.tenor < 1 || body.tenor > loanSettings.maxTenorMonths) {
+      return NextResponse.json(
+        { error: `Tenor harus antara 1-${loanSettings.maxTenorMonths} bulan` },
+        { status: 400 },
+      )
+    }
+
+    // Buat pengajuan pinjaman dengan settings
     const loan = await payload.create({
       collection: 'loans',
       data: {
         member: member.id,
         amount: body.amount,
         tenor: body.tenor,
-        interestRate: body.interestRate || 12,
+        interestRate: body.interestRate || loanSettings.defaultInterestRate,
         purpose: body.purpose || 'other',
         purposeDescription: body.purposeDescription || '',
         status: 'pending',

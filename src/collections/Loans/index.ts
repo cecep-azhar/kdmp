@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload'
 import { isSelfOrAdmin, isStaffOrAbove, isAdminOrPengurus } from '../../access'
 import { COA } from '../../constants/chart-of-accounts'
+import { createAuditLog, createNotification } from '../../utils/audit'
 
 /**
  * Interface for installment schedule entries
@@ -95,13 +96,13 @@ export const Loans: CollectionConfig = {
   hooks: {
     beforeChange: [
       async ({ data, operation, req, originalDoc }) => {
-        // Auto-generate loan ID
+        // BUG FIX #4: Use timestamp-based ID to prevent race condition
         if (operation === 'create' && !data?.loanId) {
           const now = new Date()
           const dateStr = now.toISOString().slice(0, 10).replace(/-/g, '')
-          const count = await req.payload.count({ collection: 'loans' })
-          const seq = String(count.totalDocs + 1).padStart(6, '0')
-          data.loanId = `PIN-${dateStr}-${seq}`
+          const timestamp = now.getTime().toString().slice(-6) // Last 6 digits of timestamp
+          const randomSuffix = Math.floor(Math.random() * 999).toString().padStart(3, '0')
+          data.loanId = `PIN-${dateStr}-${timestamp}${randomSuffix}`
         }
 
         // Generate installment schedule when status changes to 'active'
@@ -137,6 +138,106 @@ export const Loans: CollectionConfig = {
     ],
     afterChange: [
       async ({ doc, operation, req, previousDoc }) => {
+        // Create audit log for loan creation
+        if (operation === 'create') {
+          await createAuditLog({
+            action: 'create',
+            userId: req.user?.id,
+            userName: req.user?.name,
+            collection: 'loans',
+            recordId: doc.loanId,
+            changes: {
+              amount: doc.amount,
+              tenor: doc.tenor,
+              interestRate: doc.interestRate,
+              member: doc.member,
+            },
+            description: `Pengajuan pinjaman baru ${doc.loanId}`,
+            status: 'success',
+          })
+
+          // Notify member about loan submission
+          await createNotification(req.payload, {
+            title: 'Pengajuan Pinjaman Submitted',
+            message: `Pengajuan pinjaman Anda sebesar Rp ${doc.amount?.toLocaleString('id-ID')} sedang menunggu persetujuan.`,
+            type: 'loan',
+            recipientId: typeof doc.member === 'object' ? (doc.member as { id?: number | string })?.id : doc.member,
+            relatedId: String(doc.id),
+            relatedType: 'loan',
+          })
+        }
+
+        // Handle status changes
+        if (doc.status !== previousDoc?.status) {
+          // FITUR #7: Approval workflow - notification on status change
+          const memberId = typeof doc.member === 'object' ? (doc.member as { id?: number | string })?.id : doc.member
+
+          switch (doc.status) {
+            case 'approved':
+              await createAuditLog({
+                action: 'approval',
+                userId: req.user?.id,
+                userName: req.user?.name,
+                collection: 'loans',
+                recordId: doc.loanId,
+                description: `Pinjaman ${doc.loanId} disetujui`,
+              })
+              await createNotification(req.payload, {
+                title: 'Pinjaman Disetujui',
+                message: `Pengajuan pinjaman ${doc.loanId} telah disetujui. Menunggu pencairan.`,
+                type: 'loan',
+                recipientId: memberId,
+                relatedId: String(doc.id),
+                relatedType: 'loan',
+                priority: 'high',
+              })
+              break
+
+            case 'rejected':
+              await createAuditLog({
+                action: 'rejection',
+                userId: req.user?.id,
+                userName: req.user?.name,
+                collection: 'loans',
+                recordId: doc.loanId,
+                description: `Pinjaman ${doc.loanId} ditolak`,
+              })
+              await createNotification(req.payload, {
+                title: 'Pinjaman Ditolak',
+                message: `Pengajuan pinjaman ${doc.loanId} ditolak. ${doc.rejectionReason || ''}`,
+                type: 'loan',
+                recipientId: memberId,
+                relatedId: String(doc.id),
+                relatedType: 'loan',
+              })
+              break
+
+            case 'active':
+              await createNotification(req.payload, {
+                title: 'Pinjaman dicairkan',
+                message: `Pinjaman ${doc.loanId} telah dicairkan. Silakan cek jadwal angsuran.`,
+                type: 'loan',
+                recipientId: memberId,
+                relatedId: String(doc.id),
+                relatedType: 'loan',
+                priority: 'high',
+              })
+              break
+
+            case 'completed':
+              await createNotification(req.payload, {
+                title: 'Pinjaman Lunas',
+                message: `Selamat! Pinjaman ${doc.loanId} telah lunas. Terima kasih atas kepercayaan Anda.`,
+                type: 'loan',
+                recipientId: memberId,
+                relatedId: String(doc.id),
+                relatedType: 'loan',
+                priority: 'high',
+              })
+              break
+          }
+        }
+
         // Create ledger entry when loan is disbursed (status -> active)
         if (doc.status === 'active' && previousDoc?.status !== 'active') {
           try {

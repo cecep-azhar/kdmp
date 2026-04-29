@@ -2,7 +2,7 @@
 
 ## Sistem Informasi Koperasi Desa Merah Putih
 
-### KOPERTANI LESTARI
+### KOPERASI LESTARI
 
 ---
 
@@ -19,7 +19,7 @@ Desa Merah Putih
 **SUBTITLE:**
 
 ```
-KOPERTANI LESTARI
+KOPERASI LESTARI
 Solusi Digital untuk
 Koperasi Modern & Transparan
 ```
@@ -28,8 +28,8 @@ Koperasi Modern & Transparan
 
 ```
 Selamat datang! Hari ini kita akan memperkenalkan SIKDM - Sistem
-Informasi Koperasi Desa Merah Putih dari Kopertani Lestari. Sebuah solusi
-digital untuk mengelola operasional Kopertani secara modern, efisien, dan transparan.
+Informasi Koperasi Desa Merah Putih dari KOPERASI Lestari. Sebuah solusi
+digital untuk mengelola operasional KOPERASI secara modern, efisien, dan transparan.
 ```
 
 ---
@@ -61,7 +61,7 @@ Mengapa SIKDM Hadir?
 **PRESENTER NOTES:**
 
 ```
-Sebelum sistem digital, Kopertani menghadapi banyak tantangan.
+Sebelum sistem digital, KOPERASI menghadapi banyak tantangan.
 Pencatatan manual rentan salah, anggota harus datang ke kantor untuk
 cek saldo, dan penyusunan laporan memakan waktu lama. SIKDM hadir
 untuk menyelesaikan semua masalah ini.
@@ -69,13 +69,13 @@ untuk menyelesaikan semua masalah ini.
 
 ---
 
-## SLIDE 3: Tentang Kopertani Lestari
+## SLIDE 3: Tentang KOPERASI Lestari
 
 **TITLE:**
 
 ```
-KOPERTANI LESTARI
-Komunitas Kopertani Koperasi Desa Merah Putih
+KOPERASI LESTARI
+Komunitas KOPERASI Koperasi Desa Merah Putih
 ```
 
 **CONTENT (info cards):**
@@ -92,7 +92,7 @@ Komunitas Kopertani Koperasi Desa Merah Putih
 │                                                             │
 │   🌱 KOMODITAS                                              │
 │   ──────────                                                │
-│   Kopertani Serba Guna                                     │
+│   KOPERASI Serba Guna                                     │
 │   Simpan Pinjam, Perdagangan, Pertanian                    │
 │                                                             │
 ├─────────────────────────────────────────────────────────────┤
@@ -107,7 +107,7 @@ Komunitas Kopertani Koperasi Desa Merah Putih
 │   🎯 VISI                                                   │
 │   ────                                                     │
 │   Meningkatkan kesejahteraan anggota                      │
-│   melalui management Kopertani modern                     │
+│   melalui management KOPERASI modern                     │
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -115,9 +115,9 @@ Komunitas Kopertani Koperasi Desa Merah Putih
 **PRESENTER NOTES:**
 
 ```
-Kopertani Lestari adalah komunitas yang berlokasi di Koperasi Koperasi Merah Putih.
+KOPERASI Lestari adalah komunitas yang berlokasi di Koperasi Koperasi Merah Putih.
 Kami bergerak di bidang simpan pinjam, perdagangan, dan pertanian.
-Visi kami adalah meningkatkan kesejahteraan anggota melalui management Kopertani modern.
+Visi kami adalah meningkatkan kesejahteraan anggota melalui management KOPERASI modern.
 ```
 
 ---
@@ -252,7 +252,7 @@ Kemudahan untuk Anggota
 ```
 Aplikasi member memberikan kemandirian bagi anggota. Mereka bisa
 melihat saldo kapan saja, mengajukan pinjaman dengan simulasi
-angsuran, melihat katalog produk, membaca berita Kopertani,
+angsuran, melihat katalog produk, membaca berita KOPERASI,
 dan mengirim kritik saran tanpa harus datang ke kantor.
 ```
 
@@ -498,7 +498,7 @@ Transaksi Toko - Point of Sale
 **PRESENTER NOTES:**
 
 ```
-Fitur POS untuk toko Kopertani. Anggota bisa beli barang di kasir,
+Fitur POS untuk toko KOPERASI. Anggota bisa beli barang di kasir,
 bayar dengan tunai, transfer, atau langsung potong saldo simpanan.
 Sistem otomatis kurangi stok, posting jurnal, dan generate laporan.
 ```
@@ -670,7 +670,7 @@ Adil & Transparan untuk Anggota
 ```
 Distribusi SHU menggunakan dua metrik: jasa modal berdasarkan
 simpanan dan jasa anggota berdasarkan transaksi. Ini sesuai
-dengan aturan Kopertani. Perhitungan otomatis per anggota,
+dengan aturan KOPERASI. Perhitungan otomatis per anggota,
 tinggal export untuk RAT.
 ```
 
@@ -681,7 +681,7 @@ tinggal export untuk RAT.
 **TITLE:**
 
 ```
-16 Buku Administrasi Kopertani
+16 Buku Administrasi KOPERASI
 ```
 
 **CONTENT (grid - checkmarks):**
@@ -714,7 +714,7 @@ tinggal export untuk RAT.
 
 ```
 SIKDM memenuhi seluruh 16 buku administrasi yang diwajibkan
-untuk Kopertani Indonesia. Tidak hanya tersedia, semua buku
+untuk KOPERASI Indonesia. Tidak hanya tersedia, semua buku
 saling terintegrasi. Input di satu tempat langsung reflect
 di buku terkait. Siap untuk audit kapan saja.
 ```
@@ -867,7 +867,7 @@ Benefits in Numbers
 **PRESENTER NOTES:**
 
 ```
-Mari kita rangkum benefits SIKDM untuk Kopertani Lestari. Waktu
+Mari kita rangkum benefits SIKDM untuk KOPERASI Lestari. Waktu
 proses 90% lebih cepat. Transparansi penuh - anggota bisa cek
 sendiri. Efisiensi biaya operasional. Monitoring stok dan penjualan
 real-time. Dan yang paling penting - akurasi perhitungan
@@ -905,7 +905,7 @@ Mulai Perjalanan Digital Anda
 │   📞 HUBUNGI KAMI                                          │
 │   ┌─────────────────────────────────────────────────────┐   │
 │   │                                                     │   │
-│   │   Kopertani Lestari - Sistem SIKDM                 │   │
+│   │   KOPERASI Lestari - Sistem SIKDM                 │   │
 │   │                                                     │   │
 │   │   Admin: https://lestari.suite.my.id/admin         │   │
 │   │   Anggota: https://memberlestari.suite.my.id        │   │
@@ -951,11 +951,11 @@ Tanya Jawab
 │                                                             │
 │   ┌─────────────────────────────────────────────────────┐   │
 │   │                                                     │   │
-│   │   KOPERTANI LESTARI                                 │   │
+│   │   KOPERASI LESTARI                                 │   │
 │   │   Sistem Informasi Koperasi Koperasi Merah Putih              │   │
 │   │                                                     │   │
 │   │   🌐 https://lestari.suite.my.id                   │   │
-│   │   📧 info@kopertanilestari.id                      │   │
+│   │   📧 info@KOPERASIlestari.id                      │   │
 │   │                                                     │   │
 │   └─────────────────────────────────────────────────────┘   │
 │                                                             │
@@ -967,7 +967,7 @@ Tanya Jawab
 ```
 Terima kasih atas perhatiannya. Sekarang saya buka sesi tanya
 jawab untuk membahas hal-hal yang ingin ditanyakan lebih lanjut
-tentang SIKDM untuk Kopertani Lestari.
+tentang SIKDM untuk KOPERASI Lestari.
 ```
 
 ---
@@ -988,7 +988,7 @@ Terima Kasih
 │                                                             │
 │                    🏛️🏛️🏛️🏛️🏛️                              │
 │                                                             │
-│               KOPERTANI LESTARI                             │
+│               KOPERASI LESTARI                             │
 │          Sistem Informasi Koperasi Koperasi Merah Putih              │
 │                                                             │
 │                                                             │
@@ -1000,10 +1000,10 @@ Terima Kasih
 │   ┌─────────────────────────────────────────────────────┐   │
 │   │                                                     │   │
 │   │                                                     │   │
-│   │        [Logo / Brand Kopertani Lestari]            │   │
+│   │        [Logo / Brand KOPERASI Lestari]            │   │
 │   │                                                     │   │
 │   │   🌐 lestari.suite.my.id                          │   │
-│   │   📧 info@kopertanilestari.id                      │   │
+│   │   📧 info@KOPERASIlestari.id                      │   │
 │   │                                                     │   │
 │   └─────────────────────────────────────────────────────┘   │
 │                                                             │
@@ -1015,7 +1015,7 @@ Terima Kasih
 
 ```
 Terima kasih atas waktu dan perhatiannya. SIKDM siap membantu
-Kopertani Lestari memasuki era digital untuk management
+KOPERASI Lestari memasuki era digital untuk management
 yang lebih modern dan transparan. Salam sejahtera untuk semua
 anggota!
 ```
@@ -1026,7 +1026,7 @@ anggota!
 
 ```
 =================================================================
-TIPS PRESENTASI UNTUK KOPERTANI LESTARI
+TIPS PRESENTASI UNTUK KOPERASI LESTARI
 =================================================================
 
 1. BACA AUDIENS
@@ -1035,7 +1035,7 @@ TIPS PRESENTASI UNTUK KOPERTANI LESTARI
    - Jika audiens pemerintah/audit → fokus 16 buku & SHU
 
 2. ALUR NARASI SUGGESTED:
-   - Kenalkan Kopertani Lestari (slide 3)
+   - Kenalkan KOPERASI Lestari (slide 3)
    - Tunjukkan masalah (slide 2)
    - Tawarkan solusi SIKDM (slide 5-6)
    - Demo fitur utama
@@ -1057,7 +1057,7 @@ TIPS PRESENTASI UNTUK KOPERTANI LESTARI
    - ✓ Backup internet connection
 
 5. POINTS UNTUK DISOROT:
-   - Dashboard terpusat untuk semua kebutuhan Kopertani
+   - Dashboard terpusat untuk semua kebutuhan KOPERASI
    - Simpan pinjam terintegrasi dengan jurnal otomatis
    - POS/Toko untuk贸易 kebutuhan anggota
    - SHU calculation otomatis
@@ -1073,7 +1073,7 @@ TIPS PRESENTASI UNTUK KOPERTANI LESTARI
 1. Buka Beautiful.ai → Create New Presentation
 2. Pilih template: **"Bold Statement"** atau **"Two Column"**
 3. Copy setiap slide content ke dalam template
-4. Adjust font/colors sesuai brand Kopertani Lestari
+4. Adjust font/colors sesuai brand KOPERASI Lestari
 5. Add presenter notes dari kolom "PRESENTER NOTES"
 6. Preview & Present!
 
@@ -1091,4 +1091,4 @@ TIPS PRESENTASI UNTUK KOPERTANI LESTARI
 
 ---
 
-_Generated for SIKDM - Kopertani Lestari | Beautiful.ai Ready Format_
+_Generated for SIKDM - KOPERASI Lestari | Beautiful.ai Ready Format_

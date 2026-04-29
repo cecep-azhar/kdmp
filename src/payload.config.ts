@@ -27,6 +27,8 @@ import { Employees } from './collections/Employees'
 import { Suggestions } from './collections/Suggestions'
 import { MailLog } from './collections/MailLog'
 import { News } from './collections/News'
+import { Notifications } from './collections/Notifications'
+import { AuditLogs } from './collections/AuditLogs'
 // SixteenBooksNav is registered via string path in beforeNavLinks (required by Payload v3 importMap)
 
 // Globals
@@ -99,7 +101,8 @@ export default buildConfig({
     Products,
     Transactions,
     News,
-    
+    Notifications,
+    AuditLogs,
 
     Users,
     Media,

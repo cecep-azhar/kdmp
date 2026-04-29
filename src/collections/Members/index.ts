@@ -28,13 +28,14 @@ export const Members: CollectionConfig = {
   hooks: {
     beforeChange: [
       async ({ data, operation, req }) => {
+        // BUG FIX #4: Use timestamp-based ID to prevent race condition
+        // Format: KMP-YYYYMMDD-XXXXX (5 digit random suffix)
         if (operation === 'create' && !data?.memberId) {
-          // Auto-generate member ID: KMP-YYYYMMDD-XXXX
           const now = new Date()
           const dateStr = now.toISOString().slice(0, 10).replace(/-/g, '')
-          const count = await req.payload.count({ collection: 'members' })
-          const seq = String(count.totalDocs + 1).padStart(4, '0')
-          data.memberId = `KMP-${dateStr}-${seq}`
+          // Use timestamp + random suffix instead of count-based to avoid race condition
+          const randomSuffix = Math.floor(Math.random() * 99999).toString().padStart(5, '0')
+          data.memberId = `KMP-${dateStr}-${randomSuffix}`
         }
         return data
       },

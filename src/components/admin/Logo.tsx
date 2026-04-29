@@ -1,53 +1,50 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
-const Logo = () => {
-  const [appName, setAppName] = useState('SIKDMP')
-  const [primaryColor, setPrimaryColor] = useState('#DC2626')
-
-  useEffect(() => {
-    const fetchSettings = async () => {
-      try {
-        const res = await fetch('/api/globals/settings')
-        if (res.ok) {
-          const data = await res.json()
-          if (data.appName) setAppName(data.appName)
-          if (data.primaryColor) setPrimaryColor(data.primaryColor)
-        }
-      } catch (err) {
-        console.error('Failed to load logo settings', err)
-      }
-    }
-    fetchSettings()
-  }, [])
-
-  const nameParts = appName.split(' ')
-  const mainPart = nameParts[0] || 'SIKDMP'
-  const subPart = nameParts.slice(1).join(' ') || 'Koperasi Desa Merah Putih'
-
+/**
+ * KMP Logo Component
+ * Represents: Kopi Desa Merah Putih - Merah dan Putih theme
+ */
+const Logo = ({ className = '' }: { className?: string }) => {
   return (
-    <div style={{
-      display: 'flex',
-      alignItems: 'center',
-      gap: '12px',
-      padding: '0',
-    }}>
-      <div style={{
-        width: '40px',
-        height: '40px',
-        borderRadius: '10px',
-        background: `linear-gradient(135deg, ${primaryColor}, #FFFFFF)`,
+    <div
+      style={{
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: '20px',
-        fontWeight: 'bold',
-        color: primaryColor,
-        border: `2px solid ${primaryColor}`,
-      }}>
-        {mainPart.charAt(0).toUpperCase()}
-      </div>
+        gap: '12px',
+        padding: '0',
+      }}
+      className={className}
+    >
+      {/* SVG Logo - Merah Putih theme */}
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 100 100"
+        width="40"
+        height="40"
+        style={{ borderRadius: '10px' }}
+      >
+        {/* Background circle - Merah */}
+        <circle cx="50" cy="50" r="48" fill="#DC2626" />
+        {/* White inner ring */}
+        <circle cx="50" cy="50" r="38" fill="#FFFFFF" />
+        {/* Red center circle */}
+        <circle cx="50" cy="50" r="28" fill="#DC2626" />
+        {/* KMP text */}
+        <text
+          x="50"
+          y="56"
+          fontFamily="Arial, sans-serif"
+          fontSize="22"
+          fontWeight="bold"
+          fill="#FFFFFF"
+          textAnchor="middle"
+        >
+          KMP
+        </text>
+      </svg>
+
       <div>
         <div style={{
           fontSize: '16px',
@@ -55,7 +52,7 @@ const Logo = () => {
           lineHeight: '1.2',
           color: 'var(--theme-text)',
         }}>
-          {mainPart}
+          KMP
         </div>
         <div style={{
           fontSize: '11px',
@@ -64,7 +61,7 @@ const Logo = () => {
           letterSpacing: '0.5px',
           textTransform: 'uppercase'
         }}>
-          {subPart}
+          Kopi Desa Merah Putih
         </div>
       </div>
     </div>

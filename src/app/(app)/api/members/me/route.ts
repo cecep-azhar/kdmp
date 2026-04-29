@@ -3,6 +3,27 @@ import { NextResponse } from 'next/server'
 import { getPayload } from 'payload'
 import config from '@payload-config'
 
+// BUG FIX: Define proper types instead of using `any`
+interface LoanSummary {
+  loanId: string
+  amount: number
+  status: string
+  remainingBalance: number
+}
+
+interface MemberProfile {
+  memberId: string
+  fullName: string
+  membershipStatus: string
+  joinDate: string
+  phone?: string
+  address?: string
+  summary: {
+    totalSavingsTransactions: number
+    activeLoans: LoanSummary[]
+  }
+}
+
 /**
  * GET /api/members/me
  * Mengambil profil anggota yang sedang login
@@ -48,7 +69,8 @@ export async function GET(request: Request) {
 
     const member = members.docs[0]
 
-    // Ambil ringkasan simpanan
+    // BUG FIX #6: Use pagination with safe limits instead of limit: 0
+    // Ambil ringkasan simpanan - hanya hitung transaksi saja
     const savings = await payload.find({
       collection: 'savings',
       where: {
@@ -57,7 +79,8 @@ export async function GET(request: Request) {
           { status: { equals: 'completed' } },
         ],
       },
-      limit: 0,
+      limit: 500, // Safe limit instead of 0
+      pagination: true,
     })
 
     // Ambil pinjaman aktif
@@ -72,30 +95,32 @@ export async function GET(request: Request) {
       limit: 5,
     })
 
+    const profile: MemberProfile = {
+      memberId: member.memberId || '',
+      fullName: member.fullName || '',
+      membershipStatus: member.membershipStatus || 'unknown',
+      joinDate: member.joinDate || '',
+      phone: member.phone ?? undefined,
+      address: member.address ?? undefined,
+      summary: {
+        totalSavingsTransactions: savings.totalDocs,
+        activeLoans: activeLoans.docs.map((loan) => ({
+          loanId: loan.loanId || '',
+          amount: loan.amount || 0,
+          status: loan.status || 'unknown',
+          remainingBalance: loan.remainingBalance || 0,
+        })),
+      },
+    }
+
     return NextResponse.json({
       success: true,
-      data: {
-        memberId: member.memberId,
-        fullName: member.fullName,
-        membershipStatus: member.membershipStatus,
-        joinDate: member.joinDate,
-        phone: member.phone,
-        address: member.address,
-        summary: {
-          totalSavingsTransactions: savings.totalDocs,
-          activeLoans: activeLoans.docs.map((loan: any) => ({
-            loanId: loan.loanId,
-            amount: loan.amount,
-            status: loan.status,
-            remainingBalance: loan.remainingBalance,
-          })),
-        },
-      },
+      data: profile,
     })
-  } catch (error: any) {
+  } catch (error) {
     console.error('Member profile fetch error:', error)
     return NextResponse.json(
-      { error: error.message || 'Terjadi kesalahan internal' },
+      { error: error instanceof Error ? error.message : 'Terjadi kesalahan internal' },
       { status: 500 },
     )
   }

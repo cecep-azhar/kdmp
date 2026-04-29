@@ -22,22 +22,69 @@ export const Savings: CollectionConfig = {
   },
   hooks: {
     beforeChange: [
-      async ({ data, operation, req }) => {
-        // Auto-generate saving ID
+      async ({ data, operation, req, originalDoc }) => {
+        // BUG FIX #4: Use timestamp-based ID to prevent race condition
         if (operation === 'create' && !data?.savingId) {
           const now = new Date()
           const dateStr = now.toISOString().slice(0, 10).replace(/-/g, '')
-          const count = await req.payload.count({ collection: 'savings' })
-          const seq = String(count.totalDocs + 1).padStart(6, '0')
-          data.savingId = `SIM-${dateStr}-${seq}`
+          const timestamp = now.getTime().toString().slice(-6) // Last 6 digits
+          const randomSuffix = Math.floor(Math.random() * 9999).toString().padStart(4, '0')
+          data.savingId = `SIM-${dateStr}-${timestamp}${randomSuffix}`
         }
+
+        // BUG FIX #2: Prevent withdrawal of Simpanan Pokok (per UU No. 25 Tahun 1992)
+        if (data?.transactionType === 'withdrawal' && data?.type === 'pokok') {
+          throw new Error('Simpanan Pokok tidak dapat ditarik selama masih menjadi anggota')
+        }
+
+        // BUG FIX #3: Validate balance for withdrawals
+        if (data?.transactionType === 'withdrawal' && data?.type !== 'pokok') {
+          const memberId = data.member
+
+          // Calculate total deposits and withdrawals for this member's savings type
+          const existingSavings = await req.payload.find({
+            collection: 'savings',
+            where: {
+              and: [
+                { member: { equals: memberId } },
+                { type: { equals: data.type } },
+                { status: { equals: 'completed' } },
+              ],
+            },
+            limit: 0,
+          }) as { docs: Array<{ amount: number; transactionType: string }> }
+
+          let currentBalance = 0
+          existingSavings.docs.forEach((s) => {
+            if (s.transactionType === 'deposit') {
+              currentBalance += s.amount || 0
+            } else {
+              currentBalance -= s.amount || 0
+            }
+          })
+
+          // For updates, add back the original amount
+          if (operation === 'update' && originalDoc?.amount) {
+            currentBalance += originalDoc.transactionType === 'deposit'
+              ? originalDoc.amount
+              : -originalDoc.amount
+          }
+
+          if ((data.amount || 0) > currentBalance) {
+            throw new Error(`Saldo tidak mencukupi. Saldo saat ini: Rp ${currentBalance.toLocaleString('id-ID')}`)
+          }
+        }
+
         return data
       },
     ],
     afterChange: [
-      async ({ doc, operation, req }) => {
-        // Setelah simpanan dibuat/status berubah, catat ke Ledger
-        if (operation === 'create' && doc.status === 'completed') {
+      async ({ doc, operation, req, previousDoc }) => {
+        // BUG FIX #8: Handle both create AND update operations for ledger entries
+        // Only create ledger entry when status becomes 'completed'
+        const statusChangedToCompleted = previousDoc?.status !== 'completed' && doc.status === 'completed'
+
+        if (statusChangedToCompleted || (operation === 'create' && doc.status === 'completed')) {
           try {
             const accountCode = getSavingsAccountCode(doc.type)
 
